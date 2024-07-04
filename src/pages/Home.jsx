@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useContext, useState } from "react";
+// import { useTranslation } from "react-i18next";
+// import LanguageSwitcher from "../LanguageSwitcher";
 import { Link } from "react-router-dom";
 
 import { Header } from "../components/Header/Header";
 import { Nav } from "../components/Nav/Nav";
 import { Footer } from "../components/Footer/Footer";
+import { AuthContext } from "../context/AuthContext";
+import { MenuContext } from "../context/MenuContext";
+
+import { db, auth } from "../firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+import { signOut } from "firebase/auth";
+
 // img
+import logo from "../img/png/logo.png";
 import linkArrow from "../img/png/icone-link-arrow.png";
+import dropdown from "../img/png/icone-dropdown-arrow-blue.png";
 import linkArrowBlue from "../img/png/icone-link-arrow-blue.png";
 import coeur from "../img/png/icone-coup-de-coeur.png";
 import heroEnchere from "../img/jpg/hero-enchere.jpg";
@@ -21,11 +32,207 @@ import bridge from "../img/png/icone-bridge.png";
 import lordStampee from "../img/jpg/lord-stampee.jpg";
 
 export const Home = () => {
+  // const { t } = useTranslation();
+  const { isMenuOpen } = useContext(MenuContext);
+  const { toggleMenu } = useContext(MenuContext);
+
+  const { currentUser } = useContext(AuthContext);
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    if (currentUser && currentUser.uid) {
+      const getUser = () => {
+        const unsub = onSnapshot(doc(db, "users", currentUser.uid), (doc) => {
+          setUser(doc.data());
+        });
+
+        return () => {
+          unsub();
+        };
+      };
+
+      getUser();
+    }
+  }, [currentUser]);
   return (
     <div>
       <Header />
       <Nav />
+
+      {/* <div>
+        <LanguageSwitcher />
+        <h1>{t("welcome")}</h1>
+        <p>{t("description")}</p>
+      </div> */}
       <main>
+        {/* Barre de recherche mobile */}
+        <div
+          className="input-bar input-bar--mobile"
+          role="search"
+          aria-label="search-bar-input"
+        >
+          <div className="input-bar__text">
+            <p>Avancée</p>
+            <img
+              className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
+              src={dropdown}
+              alt="fleche dropwdown"
+            />
+          </div>
+          <input
+            className="input-bar__input"
+            type="text"
+            id="input-bar-mobile"
+            name="input-bar"
+            placeholder="Trouvez une enchère"
+          />
+        </div>
+        <aside
+          className={
+            isMenuOpen ? "menu__mobile menu--open" : "menu__mobile menu--close"
+          }
+          data-js-menu
+        >
+          <div className="menu__close--wrapper" data-js-close>
+            <button
+              className="menu__close"
+              onClick={toggleMenu}
+              aria-label="menu-close"
+            ></button>
+          </div>
+
+          <ul className="menu__list menu__list--mobile">
+            <li className="menu__item menu__item--principal">
+              <a className="menu__link" href="/catalogue">
+                Catalogue d'enchères
+              </a>
+              <ul className="menu__dropdown">
+                <li className="menu__item">
+                  <a className="menu__link" href="catalogue-enchere.html">
+                    En cours
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="catalogue-enchere.html">
+                    Archive
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item menu__item--principal">
+              <a className="menu__link" href="#">
+                Fonctionnement
+              </a>
+              <ul className="menu__dropdown">
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Termes et conditions
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Aide
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Contactez le webmestre
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item menu__item--principal">
+              <a className="menu__link" href="">
+                À propos de Lord Réginald Stampee III
+              </a>
+              <ul className="menu__dropdown">
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    La philatélie, c'est la vie.
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Biographie du Lord
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Historique familial
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item menu__item--principal">
+              <a className="menu__link" href="#">
+                contactez-nous
+              </a>
+            </li>
+          </ul>
+          <a href="home">
+            <img className="footer__logo" src={logo} alt="logo Stampee" />
+          </a>
+          {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile">
+            <li className="menu__item">
+              <a href="{{ route('login') }}">Se connecter</a>
+            </li>
+            <li className="menu__item">
+              <a href="{{ route('register') }}">Devenir membre</a>
+            </li>
+          </ul> */}
+          {currentUser ? (
+            <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile">
+              <div>
+                <li className="menu__item divid">
+                  <Link className="navEntete-link" to="#">
+                    Bonjour {user.nom}
+                  </Link>
+                </li>
+                <li className="menu__item divid">
+                  <Link className="navEntete-link" to="/publish">
+                    publier une enchère
+                  </Link>
+                </li>
+              </div>
+
+              <div>
+                <li className="menu__item">
+                  <Link className="" onClick={() => signOut(auth)}>
+                    Se déconnecter
+                  </Link>
+                </li>
+
+                <li className="menu__item">
+                  <Link
+                    className="navEntete-link"
+                    to="/listePrive"
+                    onClick={toggleMenu}
+                  >
+                    mes enchères
+                  </Link>
+                </li>
+              </div>
+            </ul>
+          ) : (
+            <ul className="wrapper--header menu__sous-menu mobile--login">
+              <li className="menu__item">
+                <Link to="/login">Se connecter</Link>
+              </li>
+              <li className="menu__item">
+                <Link to="/register">Devenir membre</Link>
+              </li>
+            </ul>
+          )}
+          {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile">
+            <li className="menu__item">
+              <a href="{{ route('login') }}">Se connecter</a>
+            </li>
+            <li className="menu__item">
+              <a href="{{ route('register') }}">Devenir membre</a>
+            </li>
+          </ul> */}
+        </aside>
+        {/* -----------------------------------------------mobile end */}
         {/* <!-- HERO --> */}
         <div className="hero hero--accueil">
           <div className="wrapper wrapper--hero">

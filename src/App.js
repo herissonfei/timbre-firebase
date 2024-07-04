@@ -1,6 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { useContext } from "react";
+import React from "react";
+// import { useTranslation } from "react-i18next";
+// import LanguageSwitcher from "./LanguageSwitcher";
 
 import { Home } from "./pages/Home";
 import { Register } from "./pages//Register/Register";
@@ -9,12 +11,12 @@ import { Catalogue } from "./pages/Catalogue/Catalogue";
 import { Enchere } from "./pages/Enchere";
 import { Publish } from "./pages/Publish/Publish";
 import { ListePrive } from "./pages/ListePrive/ListePrive";
-// import { AuthContext } from "./context/AuthContext";
 
 function App() {
   // 之后有用
   // const { currentUser } = useContext(AuthContext);
   // console.log(currentUser);
+  // const { t } = useTranslation();
   return (
     <BrowserRouter>
       <Routes>
@@ -30,6 +32,11 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    // <div>
+    //   <LanguageSwitcher />
+    //   <h1>{t('welcome')}</h1>
+    //   <p>{t('description')}</p>
+    // </div>
   );
 }
 

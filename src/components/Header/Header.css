@@ -5,7 +5,7 @@
 }
 
 .header {
-  display: block;
+  display: none;
 }
 
 .header__logo {
@@ -136,11 +136,11 @@ header .input-bar__input {
   height: 30%;
   width: 1px;
 }
-/* @media only screen and (min-width: 1200px) {
-    .header {
-        display: block;
-    }
-  } */
+@media only screen and (min-width: 1200px) {
+  .header {
+    display: block;
+  }
+}
 
 /* style barre de recherche mobile|tablet */
 .input-bar--tablet {
@@ -155,6 +155,12 @@ header .input-bar__input {
 
   .input-bar--tablet .input-bar__input {
     border-radius: 0 5px 5px 0;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .input-bar--tablet {
+      display: none;
+    }
   }
 
   .input-bar--mobile {

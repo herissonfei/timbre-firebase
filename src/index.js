@@ -4,14 +4,22 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./context/AuthContext";
+import { MenuProvider } from "./context/MenuContext";
+import { RechercheProvider } from "./context/RechercheContext";
+
+import "./i18n";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthContextProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </AuthContextProvider>
+  <MenuProvider>
+    <RechercheProvider>
+      <AuthContextProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </AuthContextProvider>
+    </RechercheProvider>
+  </MenuProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

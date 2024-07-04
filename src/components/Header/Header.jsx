@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../img/png/logo.png";
 import dropdownArrowBlue from "../../img/png/icone-dropdown-arrow-blue.png";
 import { AuthContext } from "../../context/AuthContext";
+import { MenuContext } from "../../context/MenuContext";
 import "./Header.css";
 import { db, auth } from "../../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -28,6 +29,9 @@ export const Header = () => {
       getUser();
     }
   }, [currentUser]);
+
+  const { toggleMenu } = useContext(MenuContext);
+
   return (
     <div>
       <header className="header header--bg">
@@ -53,11 +57,7 @@ export const Header = () => {
             />
           </div>
           {/* ------------------------------------- */}
-          <button className="burger" aria-label="burger" data-js-burger>
-            <span className="burger__bar"></span>
-            <span className="burger__bar"></span>
-            <span className="burger__bar"></span>
-          </button>
+
           {currentUser ? (
             <ul className="wrapper--header menu__sous-menu menu__sous-menu--header--login">
               <div>
@@ -99,6 +99,40 @@ export const Header = () => {
           )}
         </div>
       </header>
+      <nav className="menu">
+        <div className="menu__logo">
+          <a href="/home">
+            <img src={logo} alt="logo Stampee" />
+          </a>
+        </div>
+        <div className="input-bar input-bar--tablet">
+          <div className="input-bar__text">
+            <p>Avancée</p>
+            <img
+              className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
+              src={dropdownArrowBlue}
+              alt="fleche dropwdown"
+            />
+          </div>
+          <input
+            className="input-bar__input"
+            type="text"
+            id="input-bar-tablet"
+            name="input-bar"
+            placeholder="Trouvez une enchère"
+          />
+        </div>
+        <button
+          className="burger"
+          onClick={toggleMenu}
+          aria-label="burger"
+          data-js-burger
+        >
+          <span className="burger__bar"></span>
+          <span className="burger__bar"></span>
+          <span className="burger__bar"></span>
+        </button>
+      </nav>
     </div>
   );
 };

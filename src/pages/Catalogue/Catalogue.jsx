@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { Header } from "../../components/Header/Header";
 import { Nav } from "../../components/Nav/Nav";
 import { Footer } from "../../components/Footer/Footer";
+import { AuthContext } from "../../context/AuthContext";
 import { Pagination } from "../../components/Pagination";
+import { MenuContext } from "../../context/MenuContext";
+import { RechercheContext } from "../../context/RechercheContext";
+import { signOut } from "firebase/auth";
+import { db, auth } from "../../firebase";
+
 // img
 import gallery1 from "../../img/png/icone-gallery-1.png";
 import gallery2 from "../../img/png/icone-gallery-2.png";
 import roundArrow from "../../img/png/icone-round-arrow-orange.png";
-
+import linkArrow from "../../img/png/icone-link-arrow.png";
 import coeur from "../../img/png/icone-coup-de-coeur.png";
-
-import { db } from "../../firebase";
+import dropdown from "../../img/png/icone-dropdown-arrow-blue.png";
+import logo from "../../img/png/logo.png";
 
 import {
   collection,
@@ -31,6 +37,27 @@ export const Catalogue = () => {
   const [bids, setBids] = useState([]);
   const [bidsCount, setBidsCount] = useState([]);
   // console.log(bidsData);
+  const { isMenuOpen } = useContext(MenuContext);
+  const { toggleMenu } = useContext(MenuContext);
+  const { isRechercheOpen } = useContext(RechercheContext);
+  const { toggleRecherche } = useContext(RechercheContext);
+  const { currentUser } = useContext(AuthContext);
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    if (currentUser && currentUser.uid) {
+      const getUser = () => {
+        const unsub = onSnapshot(doc(db, "users", currentUser.uid), (doc) => {
+          setUser(doc.data());
+        });
+
+        return () => {
+          unsub();
+        };
+      };
+
+      getUser();
+    }
+  }, [currentUser]);
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
     const itemsPerPage = 10;
@@ -115,7 +142,7 @@ export const Catalogue = () => {
 
   const [selectedOption, setSelectedOption] = useState("");
   const [chercher, setChercher] = useState(false);
-
+  // console.log(chercher);
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -141,8 +168,6 @@ export const Catalogue = () => {
       try {
         let queryConstraints = [
           where("conditions", "in", selectedCategoriesConditions),
-          // where("reserveprice", "<=", maxPrix),
-          // where("reserveprice", ">=", minPrix),
         ];
 
         if (selectedOption && selectedOption !== "tous") {
@@ -156,26 +181,14 @@ export const Catalogue = () => {
             queryConstraints.push(where("reserveprice", "<=", maxPrix));
           }
         }
+
         const q1 = query(collection(db, "bids"), ...queryConstraints);
 
         const querySnapshot1 = await getDocs(q1);
-        const docIds1 = querySnapshot1.docs.map((doc) => doc.id);
-        console.log(docIds1);
 
-        console.log(selectedCategoriesTypes);
+        const results = querySnapshot1.docs.map((doc) => doc.data());
+        // console.log(results);
 
-        let query2 = query(
-          collection(db, "bids"),
-          where("type", "in", selectedCategoriesTypes),
-          where("bidstampid", "in", docIds1) // Filter by document IDs from the first query
-        );
-
-        // Execute the second query
-        const querySnapshot2 = await getDocs(query2);
-        const results = querySnapshot2.docs.map((doc) => doc.data());
-        console.log(results);
-
-        // setBids(results);
         setBids(results.slice(0, 10));
         setBidsData(results);
         setBidsCount(results.length);
@@ -187,6 +200,7 @@ export const Catalogue = () => {
     if (chercher) {
       getChercher();
       setChercher(false);
+      toggleRecherche();
     } else {
       // console.log(2);
     }
@@ -220,7 +234,7 @@ export const Catalogue = () => {
   };
   const handleChercher = (event) => {
     event.preventDefault();
-
+    console.log("1");
     if (selectedCategoriesConditions.length === 0) {
       setselectedCategoriesConditions([
         "Parfaite",
@@ -232,18 +246,19 @@ export const Catalogue = () => {
     }
     // console.log(selectedCategoriesConditions);
 
-    if (selectedCategoriesTypes.length === 0) {
-      setSelectedCategoriesTypes([
-        "Général",
-        "Courrier Aérien",
-        "Livret",
-        "Port dû",
-        "Carte postale",
-        "Semi postal",
-        "Entier postal",
-      ]);
-    }
+    // if (selectedCategoriesTypes.length === 0) {
+    //   setSelectedCategoriesTypes([
+    //     "Général",
+    //     "Courrier Aérien",
+    //     "Livret",
+    //     "Port dû",
+    //     "Carte postale",
+    //     "Semi postal",
+    //     "Entier postal",
+    //   ]);
+    // }
     if (!chercher) {
+      // console.log("1");
       setChercher(true);
     }
   };
@@ -289,6 +304,162 @@ export const Catalogue = () => {
       <Header />
       <Nav />
       <main>
+        {/* Barre de recherche mobile */}
+        <div
+          className="input-bar input-bar--mobile"
+          role="search"
+          aria-label="search-bar-input"
+        >
+          <div className="input-bar__text">
+            <p>Avancée</p>
+            <img
+              className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
+              src={dropdown}
+              alt="fleche dropwdown"
+            />
+          </div>
+          <input
+            className="input-bar__input"
+            type="text"
+            id="input-bar-mobile"
+            name="input-bar"
+            placeholder="Trouvez une enchère"
+          />
+        </div>
+        <aside
+          className={
+            isMenuOpen ? "menu__mobile menu--open" : "menu__mobile menu--close"
+          }
+          data-js-menu
+        >
+          <div className="menu__close--wrapper" data-js-close>
+            <button
+              className="menu__close"
+              onClick={toggleMenu}
+              aria-label="menu-close"
+            ></button>
+          </div>
+
+          <ul className="menu__list menu__list--mobile">
+            <li className="menu__item menu__item--principal">
+              <a className="menu__link" href="/catalogue">
+                Catalogue d'enchères
+              </a>
+              <ul className="menu__dropdown">
+                <li className="menu__item">
+                  <a className="menu__link" href="catalogue-enchere.html">
+                    En cours
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="catalogue-enchere.html">
+                    Archive
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item menu__item--principal">
+              <a className="menu__link" href="#">
+                Fonctionnement
+              </a>
+              <ul className="menu__dropdown">
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Termes et conditions
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Aide
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Contactez le webmestre
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item menu__item--principal">
+              <a className="menu__link" href="">
+                À propos de Lord Réginald Stampee III
+              </a>
+              <ul className="menu__dropdown">
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    La philatélie, c'est la vie.
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Biographie du Lord
+                  </a>
+                </li>
+                <li className="menu__item">
+                  <a className="menu__link" href="#">
+                    Historique familial
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="menu__item menu__item--principal">
+              <a className="menu__link" href="#">
+                contactez-nous
+              </a>
+            </li>
+          </ul>
+          <a href="/home">
+            <img className="footer__logo" src={logo} alt="logo Stampee" />
+          </a>
+
+          {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile ">
+            <li className="menu__item">
+              <a href="{{ route('login') }}">Se connecter</a>
+            </li>
+            <li className="menu__item">
+              <a href="{{ route('register') }}">Devenir membre</a>
+            </li>
+          </ul> */}
+          {currentUser ? (
+            <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile">
+              <div>
+                <li className="menu__item divid">
+                  <Link className="navEntete-link" to="#">
+                    Bonjour {user.nom}
+                  </Link>
+                </li>
+                <li className="menu__item divid">
+                  <Link className="navEntete-link" to="/publish">
+                    publier une enchère
+                  </Link>
+                </li>
+              </div>
+
+              <div>
+                <li className="menu__item">
+                  <Link className="" onClick={() => signOut(auth)}>
+                    Se déconnecter
+                  </Link>
+                </li>
+
+                <li className="menu__item">
+                  <Link className="navEntete-link" to="/listePrive">
+                    mes enchères
+                  </Link>
+                </li>
+              </div>
+            </ul>
+          ) : (
+            <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile mobile--login">
+              <li className="menu__item">
+                <Link to="/login">Se connecter</Link>
+              </li>
+              <li className="menu__item">
+                <Link to="/register">Devenir membre</Link>
+              </li>
+            </ul>
+          )}
+        </aside>
         {/* <!-- HERO --> */}
         <div className="hero hero--page-interieure">
           <div className="wrapper">
@@ -326,12 +497,14 @@ export const Catalogue = () => {
             >
               {/* <option disabled>Trier</option> */}
               <option value="tous">Tous</option>
-              <option value="decroissant">Prix décroissant</option>
+              <option value="decroissant">
+                Prix décroissant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </option>
               <option value="croissant">Prix croissant</option>
-              <option value="popularite">Par popularité</option>
+              {/* <option value="popularite">Par popularité</option> */}
               {/* 这里的css得改动一下 */}
-              <option value="nouvellement-liste">Nouvellement listée</option>
-              <option value="termine-bientot">Se terminant bientôt</option>
+              {/* <option value="nouvellement-liste">Nouvellement listée</option> */}
+              {/* <option value="termine-bientot">Se terminant bientôt</option> */}
             </select>
             <div className="wrapper--header menu-secondaire__icone">
               <div className="btn">
@@ -344,15 +517,12 @@ export const Catalogue = () => {
           </div>
           <button
             className="burger burger-search btn"
+            onClick={toggleRecherche}
             aria-label="burger"
             data-js-search
           >
             Recherche Avancée
-            <img
-              width="5"
-              src="assets/img/png/icone-link-arrow.png"
-              alt="fleche dropwdown"
-            />
+            <img width="5" src={linkArrow} alt="fleche dropwdown" />
           </button>
         </div>
         {/* <div className="menu__nav-page menu__nav-page-wrapper"> */}
@@ -448,7 +618,6 @@ export const Catalogue = () => {
                     <div className="wrapper--header">
                       <input
                         type="number"
-                        placeholder="00.00"
                         value={minPrix}
                         onChange={handleMinPrixChange}
                       />
@@ -465,7 +634,7 @@ export const Catalogue = () => {
                     </div>
                   </div>
                 </section>
-                <section>
+                {/* <section>
                   <h3>Type</h3>
                   <div>
                     <input
@@ -542,8 +711,8 @@ export const Catalogue = () => {
                     />
                     <label htmlFor="entier-postal">Entier postal</label>
                   </div>
-                </section>
-                <section>
+                </section> */}
+                {/* <section>
                   <h3>Année d'émission</h3>
                   <div className="wrapper--header">
                     <div className="wrapper--header">
@@ -562,8 +731,8 @@ export const Catalogue = () => {
                       onChange={handleMaxAnneeChange}
                     />
                   </div>
-                </section>
-                <section>
+                </section> */}
+                {/* <section>
                   <h3>Dimensions (pouces)</h3>
                   <div className="wrapper--header">
                     <div className="wrapper--header">
@@ -581,7 +750,7 @@ export const Catalogue = () => {
                       aria-label="input-dimension-width"
                     />
                   </div>
-                </section>
+                </section> */}
                 <div className="wrapper--header">
                   <div>
                     <Link
@@ -610,7 +779,11 @@ export const Catalogue = () => {
 
             {/* <!-- ASIDE MOBILE RECHERCHE AVANCÉE --> */}
             <aside
-              className="menu__mobile menu--close menu__mobile--white"
+              className={
+                isRechercheOpen
+                  ? "menu__mobile menu__mobile--white menu--open"
+                  : "menu__mobile menu__mobile--white menu--close"
+              }
               aria-label="aside-search-close"
               data-js-search-bar
             >
@@ -619,6 +792,7 @@ export const Catalogue = () => {
                 <button
                   className="menu__close"
                   aria-label="aside-search-close-btn"
+                  onClick={toggleRecherche}
                 ></button>
               </div>
 
@@ -626,6 +800,62 @@ export const Catalogue = () => {
                 <form method="GET">
                   <section>
                     <h3>Condition</h3>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="parfaite"
+                        checked={selectedCategoriesConditions.includes(
+                          "Parfaite"
+                        )}
+                        onChange={() => handleCategoryChange("Parfaite")}
+                      />
+                      <label htmlFor="parfaite">Parfaite</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="excellente"
+                        checked={selectedCategoriesConditions.includes(
+                          "Excellente"
+                        )}
+                        onChange={() => handleCategoryChange("Excellente")}
+                      />
+                      <label htmlFor="excellente">Excellente</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="bonne"
+                        checked={selectedCategoriesConditions.includes("Bonne")}
+                        onChange={() => handleCategoryChange("Bonne")}
+                      />
+                      <label htmlFor="bonne">Bonne</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="moyenne"
+                        checked={selectedCategoriesConditions.includes(
+                          "Moyenne"
+                        )}
+                        onChange={() => handleCategoryChange("Moyenne")}
+                      />
+                      <label htmlFor="moyenne">Moyenne</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="endommage"
+                        checked={selectedCategoriesConditions.includes(
+                          "Endommagé"
+                        )}
+                        onChange={() => handleCategoryChange("Endommagé")}
+                      />
+                      <label htmlFor="endommage">Endommagé</label>
+                    </div>
+                  </section>
+                  {/* <section>
+                    <h3>Condition</h3>   
                     <select aria-label="select-condition">
                       <option value="tous">Tous</option>
                       <option value="parfaite">Parfaite</option>
@@ -634,7 +864,7 @@ export const Catalogue = () => {
                       <option value="moyenne">Moyenne</option>
                       <option value="endommage">Endommagé</option>
                     </select>
-                  </section>
+                  </section> */}
                   <section>
                     <h3>Pays d'origine</h3>
                     <select aria-label="mobile-select-country">
@@ -652,7 +882,7 @@ export const Catalogue = () => {
                     <h3>Prix</h3>
                     <div className="wrapper--header">
                       <div className="wrapper--header">
-                        <input type="number" name="prix" placeholder="00.00" />
+                        <input type="number" name="prix" />
                         <span>$&nbsp;-</span>
                       </div>
                       <div className="wrapper--header">
@@ -665,7 +895,7 @@ export const Catalogue = () => {
                       </div>
                     </div>
                   </section>
-                  <section>
+                  {/* <section>
                     <h3>Type</h3>
                     <select aria-label="select-type">
                       <option value="tous">Tous</option>
@@ -677,8 +907,8 @@ export const Catalogue = () => {
                       <option value="semi-postal">Semi postal</option>
                       <option value="entier-postal">Entier postal</option>
                     </select>
-                  </section>
-                  <section>
+                  </section> */}
+                  {/* <section>
                     <h3>Année d'émission</h3>
                     <div className="wrapper--header">
                       <div className="wrapper--header">
@@ -695,8 +925,8 @@ export const Catalogue = () => {
                         aria-label="mobile-input-year-max"
                       />
                     </div>
-                  </section>
-                  <section>
+                  </section> */}
+                  {/* <section>
                     <h3>Dimensions (pouces)</h3>
                     <div className="wrapper--header">
                       <div className="wrapper--header">
@@ -714,17 +944,18 @@ export const Catalogue = () => {
                         aria-label="mobile-input-dimension-width"
                       />
                     </div>
-                  </section>
+                  </section> */}
                   <div className="wrapper--header-mobile">
                     <div>
-                      <Link className="btn btn--text-icone">
+                      <Link className="btn btn--text-icone default">
                         Par défaut
-                        <img
-                          src="assets/img/png/icone-round-arrow-orange.png"
-                          alt="icone fleche par defaut"
-                        />
+                        <img src={roundArrow} alt="icone fleche par defaut" />
                       </Link>
-                      <Link className="btn btn--text-icone" to="#">
+                      <Link
+                        className="btn btn--text-icone"
+                        to="#"
+                        onClick={handleChercher}
+                      >
                         Chercher
                       </Link>
                     </div>
@@ -772,9 +1003,9 @@ export const Catalogue = () => {
                         </Link>
                       </div>
                       <h3>{bid.stampName}</h3>
-                      <p>{bid.conditions}</p>
+                      {/* <p>{bid.conditions}</p>
                       <p>{bid.type}</p>
-                      <p>{bid.country}</p>
+                      <p>{bid.country}</p> */}
 
                       <p className="tile__text">
                         Mise courante |{" "}
@@ -851,7 +1082,9 @@ export const Catalogue = () => {
               changeClass="false"
             />
             <p className="gallery__text gallery__text--right">
-              {bidsCount} enchères trouvées | 0 - 20 de {bidsCount}
+              {bids.length} enchères trouvées | {(currentPage - 1) * 10} -{" "}
+              {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10} de{" "}
+              {bidsCount}
             </p>
           </div>
         </div>

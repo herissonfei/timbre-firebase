@@ -125,7 +125,6 @@ const resources = {
       Reserve_price: "Prix de réserve",
       status: "statut",
       certified: "certifié",
-
     },
     // _
   },
@@ -258,8 +257,8 @@ i18n
   .init({
     resources,
     // lng: "en", // 默认语言
-    lng: "en", // 默认语言
-    fallbackLng: "en",
+    lng: "fr", // 默认语言
+    fallbackLng: "fr",
     // fallbackLng: "en",
     interpolation: {
       escapeValue: false, // React 已经进行转义处理

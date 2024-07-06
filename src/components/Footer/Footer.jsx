@@ -1,33 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+import { useTranslation } from "react-i18next";
 import "./Footer.css";
 import logo from "../../img/png/logo.png";
 export const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="footer">
       <img width="150" src={logo} alt="logo Stampee" />
       <div className="wrapper grid grid--3-var-footer footer--border-white">
         <section>
-          <h2>Accès rapides</h2>
+          <h2>{t("Quick_access")}</h2>
           <ul className="footer__menu">
             <li className="menu__item menu__item--footer">
               <Link to="#" className="menu__link">
-                Actualités
+                {t("News")}
               </Link>
             </li>
             <li className="menu__item menu__item--footer">
               <Link to="#" className="menu__link">
-                La philatélie, c'est la vie
+                {t("Philately_is_life")}
               </Link>
             </li>
             <li className="menu__item menu__item--footer">
               <Link to="#" className="menu__link">
-                Biographie du Lord
+                {t("Lords_biography")}
               </Link>
             </li>
             <li className="menu__item menu__item--footer">
               <Link to="#" className="menu__link">
-                Historique familial
+                {t("Family_history")}
               </Link>
             </li>
           </ul>
@@ -35,24 +38,23 @@ export const Footer = () => {
           <ul className="wrapper--header menu__sous-menu menu__sous-menu--footer">
             <li className="menu__item">
               <Link to="login" className="menu__link">
-                Se connecter
+                {t("Log_in")}
               </Link>
             </li>
             <li className="menu__item">
               <Link to="register" className="menu__link">
-                Devenir membre
+                {t("Become_a_member")}
               </Link>
             </li>
           </ul>
           <br />
-          <small>© Stampee 2024, Tous droits réservés</small>
+          <small>© {t("Stampee_2024")}</small>
         </section>
 
         <section>
-          <h2>Abonnez-vous à notre infolettre !</h2>
+          <h2>{t("Subscribe_to_our_newsletter")}</h2>
           <p className="tile__text tile__text--white">
-            Prenez connaissance en avance de toutes nos nouveautés et profiter
-            d'offres exceptionnels !
+            {t("Get_early_access")}
           </p>
           <form action="#" method="POST">
             <div className="input-bar">
@@ -64,7 +66,7 @@ export const Footer = () => {
                 placeholder="Entrez votre courriel"
               />
               <div className="input-bar__text">
-                <p>S'abonner</p>
+                <p> {t("Subscribe")}</p>
               </div>
             </div>
           </form>
@@ -78,22 +80,22 @@ export const Footer = () => {
           <ul className="footer__menu">
             <li className="menu__item menu__item--footer">
               <Link to="#" className="menu__link">
-                Termes et conditions
+                {t("Terms_conditions")}
               </Link>
             </li>
             <li className="menu__item menu__item--footer">
               <Link to="#" className="menu__link">
-                Aide
+                {t("Help")}
               </Link>
             </li>
             <li className="menu__item menu__item--footer">
               <Link to="#" className="menu__link">
-                Contactez le webmestre
+                {t("Contact_the_webmaster")}
               </Link>
             </li>
             <li className="menu__item menu__item--footer">
               <Link to="#" className="menu__link">
-                Contactez-nous
+                {t("Contact_us")}
               </Link>
             </li>
           </ul>

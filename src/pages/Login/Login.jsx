@@ -3,10 +3,13 @@ import "./Login.css";
 import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useTranslation } from "react-i18next";
 
 import logo from "../../img/png/logo.png";
 
 export const Login = () => {
+  const { t } = useTranslation();
+
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
@@ -36,20 +39,20 @@ export const Login = () => {
           </Link>
         </div>
         <div className="login-box">
-          <h2>Se connecter</h2>
+          <h2>{t("Log_in")}</h2>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Courriel</label>
+            <label htmlFor="email">{t("E_mail")}</label>
             <input type="text" id="email" name="email" required />
 
-            <label htmlFor="password">Mot de passe</label>
+            <label htmlFor="password">{t("Password")}</label>
             <input type="password" id="password" name="password" required />
 
             <input
               type="submit"
-              value="Se Connecter"
+              value={t("Log_in")}
               className="login_submit"
             />
-            {err && <span>E-mail ou mot de passe incorrect</span>}
+            {err && <span>{t("Incorrect")}</span>}
           </form>
         </div>
       </div>

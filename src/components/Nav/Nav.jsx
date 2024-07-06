@@ -1,8 +1,12 @@
 import React from "react";
 import "./Nav.css";
-import dropdownArrow from "../../img/png/icone-dropdown-arrow.png";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+// import LanguageSwitcher from "../../LanguageSwitcher";
+import dropdownArrow from "../../img/png/icone-dropdown-arrow.png";
 export const Nav = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <nav className="menu">
@@ -10,12 +14,12 @@ export const Nav = () => {
         <ul className="menu__list menu__list--principal">
           <li className="menu__item menu__item--principal">
             <Link className="menu__link" to="/catalogue">
-              Catalogue d'enchères
+              {t("catalog")}
             </Link>
             <ul className="menu__dropdown">
               <li className="menu__item">
                 <Link className="menu__link" to="/catalogue">
-                  En cours
+                  {t("progress")}
                 </Link>
               </li>
               <li className="menu__item">
@@ -32,22 +36,22 @@ export const Nav = () => {
           </li>
           <li className="menu__item menu__item--principal">
             <Link className="menu__link" to="#">
-              Fonctionnement
+              {t("Functioning")}
             </Link>
             <ul className="menu__dropdown">
               <li className="menu__item">
                 <Link className="menu__link" to="#">
-                  Termes et conditions
+                  {t("Terms_conditions")}
                 </Link>
               </li>
               <li className="menu__item">
                 <Link className="menu__link" to="#">
-                  Aide
+                  {t("Help")}
                 </Link>
               </li>
               <li className="menu__item">
                 <Link className="menu__link" to="#">
-                  Contactez le webmestre
+                  {t("Contact_the_webmaster")}
                 </Link>
               </li>
             </ul>
@@ -59,22 +63,22 @@ export const Nav = () => {
           </li>
           <li className="menu__item menu__item--principal">
             <Link className="menu__link" to="#">
-              À propos de Lord Réginald Stampee III
+              {t("propos")}
             </Link>
             <ul className="menu__dropdown">
               <li className="menu__item">
                 <Link className="menu__link" to="#">
-                  La philatélie, c'est la vie.
+                  {t("Philately_is_life")}
                 </Link>
               </li>
               <li className="menu__item">
                 <Link className="menu__link" to="#">
-                  Biographie du Lord
+                  {t("Lords_biography")}
                 </Link>
               </li>
               <li className="menu__item">
                 <Link className="menu__link" to="#">
-                  Historique familial
+                  {t("Family_history")}
                 </Link>
               </li>
             </ul>
@@ -86,7 +90,7 @@ export const Nav = () => {
           </li>
           <li className="menu__item menu__item--principal menu__border">
             <Link className="menu__link" to="#">
-              contactez-nous
+              {t("Contact_us")}
             </Link>
           </li>
         </ul>

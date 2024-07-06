@@ -8,6 +8,8 @@ import "./Header.css";
 import { db, auth } from "../../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { signOut } from "firebase/auth";
+import LanguageSwitcher from "../../LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 export const Header = () => {
   const { currentUser } = useContext(AuthContext);
@@ -31,6 +33,7 @@ export const Header = () => {
   }, [currentUser]);
 
   const { toggleMenu } = useContext(MenuContext);
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -41,7 +44,7 @@ export const Header = () => {
           </Link>
           <div className="input-bar">
             <div className="input-bar__text">
-              <p>Avancée</p>
+              <p>{t("Advanced")} </p>
               <img
                 className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
                 src={dropdownArrowBlue}
@@ -53,22 +56,29 @@ export const Header = () => {
               type="text"
               id="input-bar"
               name="input-bar"
-              placeholder="Trouvez une enchère"
+              placeholder={t("Find")}
             />
           </div>
           {/* ------------------------------------- */}
-
+          {/* <LanguageSwitcher /> */}
           {currentUser ? (
             <ul className="wrapper--header menu__sous-menu menu__sous-menu--header--login">
               <div>
+                <li style={{ marginTop: "22px" }}>
+                  {" "}
+                  <LanguageSwitcher />
+                </li>
+              </div>
+
+              <div>
                 <li className="menu__item divid">
                   <Link className="navEntete-link" to="#">
-                    Bonjour {user.nom}
+                    {t("Hi")} {user.nom}
                   </Link>
                 </li>
                 <li className="menu__item divid">
                   <Link className="navEntete-link" to="/publish">
-                    publier une enchère
+                    {t("post")}
                   </Link>
                 </li>
               </div>
@@ -76,24 +86,28 @@ export const Header = () => {
               <div>
                 <li className="menu__item">
                   <Link className="" onClick={() => signOut(auth)}>
-                    Se déconnecter
+                    {t("Sign_out")}
                   </Link>
                 </li>
 
                 <li className="menu__item">
                   <Link className="navEntete-link" to="/listePrive">
-                    mes enchères
+                    {t("my_auctions")}
                   </Link>
                 </li>
               </div>
             </ul>
           ) : (
             <ul className="wrapper--header menu__sous-menu menu__sous-menu--header">
-              <li className="menu__item">
-                <Link to="/login">Se connecter</Link>
+              <li>
+                {" "}
+                <LanguageSwitcher />
               </li>
               <li className="menu__item">
-                <Link to="/register">Devenir membre</Link>
+                <Link to="/login">{t("Log_in")}</Link>
+              </li>
+              <li className="menu__item">
+                <Link to="/register">{t("Become_a_member")}</Link>
               </li>
             </ul>
           )}
@@ -107,7 +121,7 @@ export const Header = () => {
         </div>
         <div className="input-bar input-bar--tablet">
           <div className="input-bar__text">
-            <p>Avancée</p>
+            <p>{t("Advanced")}</p>
             <img
               className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
               src={dropdownArrowBlue}

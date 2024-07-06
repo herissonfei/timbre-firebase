@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
-// import { useTranslation } from "react-i18next";
-// import LanguageSwitcher from "../LanguageSwitcher";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../LanguageSwitcher";
 import { Link } from "react-router-dom";
 
 import { Header } from "../components/Header/Header";
@@ -32,7 +32,7 @@ import bridge from "../img/png/icone-bridge.png";
 import lordStampee from "../img/jpg/lord-stampee.jpg";
 
 export const Home = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const { isMenuOpen } = useContext(MenuContext);
   const { toggleMenu } = useContext(MenuContext);
 
@@ -58,12 +58,12 @@ export const Home = () => {
     <div>
       <Header />
       <Nav />
-
-      {/* <div>
-        <LanguageSwitcher />
-        <h1>{t("welcome")}</h1>
-        <p>{t("description")}</p>
-      </div> */}
+      {/* {t("welcome")} */}
+      <div>
+        {/* <LanguageSwitcher /> */}
+        {/* <h1>{t("welcome")}</h1>
+        <p>{t("description")}</p> */}
+      </div>
       <main>
         {/* Barre de recherche mobile */}
         <div
@@ -72,7 +72,7 @@ export const Home = () => {
           aria-label="search-bar-input"
         >
           <div className="input-bar__text">
-            <p>Avancée</p>
+            <p>{t("Advanced")}</p>
             <img
               className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
               src={dropdown}
@@ -104,12 +104,12 @@ export const Home = () => {
           <ul className="menu__list menu__list--mobile">
             <li className="menu__item menu__item--principal">
               <a className="menu__link" href="/catalogue">
-                Catalogue d'enchères
+                {t("catalog")}
               </a>
               <ul className="menu__dropdown">
                 <li className="menu__item">
                   <a className="menu__link" href="catalogue-enchere.html">
-                    En cours
+                    {t("progress")}
                   </a>
                 </li>
                 <li className="menu__item">
@@ -232,43 +232,45 @@ export const Home = () => {
             </li>
           </ul> */}
         </aside>
+
         {/* -----------------------------------------------mobile end */}
         {/* <!-- HERO --> */}
         <div className="hero hero--accueil">
           <div className="wrapper wrapper--hero">
-            <h1 className="hero__text">Bienvenue sur Stampee</h1>
+            <h1 className="hero__text">{t("Welcome_to_Stampee")}</h1>
             <h2 className="hero__text--sous-titre">
-              Une plateforme d'enchère d'exception
+              {t("An_exceptional_auction_platform")}
             </h2>
             <p className="hero__text hero__text--text-courant">
-              Participer à une enchère n'aura jamais été aussi simple et rapide
-              ! <br /> Découvrez dès maintenant notre sélection.
+              {t("Participating")}
+              ! <br />
+              {t("Discover")}
             </p>
             <Link className="btn" to="/catalogue">
-              Voir toute les enchères
+              {t("See")}
             </Link>
           </div>
           <div className="grid grid--hero">
             <div className="bg bg--blue">
-              <h2 className="bg--blue-title">Comment ça marche ?</h2>
+              <h2 className="bg--blue-title">{t("How_does_it_work")}</h2>
               <p className="hero__text">
-                Aquérissez des timbres en quelques étapes :{" "}
+                {t("Acquire_stamps_in_a_few_steps")}{" "}
               </p>
               <ul>
                 <li>
-                  <strong>1.</strong> Connectez-vous ou inscrivez-vous
+                  <strong>1.</strong> {t("Log_in_or_sign_up")}
                 </li>
                 <li>
-                  <strong>2.</strong> Utilisez la recherche avancé pour trouver
-                  la perle rare
+                  <strong>2.</strong>{" "}
+                  {t("Use_advanced_search_to_find_the_rare_gem")}
                 </li>
                 <li className="hero__text--text-courant-var">
-                  <strong>3.</strong> Misez et suivez vos enchères favorites
-                  facilement
+                  <strong>3.</strong>{" "}
+                  {t("Bid_and_enjoy_your_favorite_auctions_easily")}
                 </li>
               </ul>
               <Link className="link--border" to="#">
-                En savoir plus
+                {t("Learn_more")}
               </Link>
               <img
                 className="icone-link-arrow"
@@ -277,18 +279,18 @@ export const Home = () => {
               />
             </div>
             <div className="bg bg--grey">
-              <h2>Découvrez les coups de coeur du Lord</h2>
+              <h2>{t("Discover_the_Lords_favorites")}</h2>
               <p className="hero__text--text-courant-var">
-                Repérez l'icone{" "}
+                {t("Look_for_the")}{" "}
                 <img
                   className="icone-coup-coeur"
                   src={coeur}
                   alt="icone coup de coeur lord"
                 />{" "}
-                afin de trouver les enchères favorites de notre expert !
+                {t("icon_to_find_our_experts_favorite_auctions")}
               </p>
               <Link className="link--border-blue" to="#">
-                Voir tous les favoris
+                {t("favorites")}
               </Link>
               <img
                 className="icone-link-arrow"
@@ -297,17 +299,16 @@ export const Home = () => {
               />
             </div>
             <div className="bg bg--white">
-              <h2>Pas encore inscrit(e) ? </h2>
+              <h2> {t("Not_yet_registered")}</h2>
               <p className="hero__text--text-courant">
-                Misez et profitez pleinement de Stampee en tant que membre
-                inscrit !
+                {t("Bid_and_enjoy_Stampee_fully_as_a_registered_member")}
               </p>
               <div className="btn__container">
                 <Link className="btn btn--orange" to="/register">
-                  Devenir membre
+                  {t("Become_a_member")}
                 </Link>
                 <Link className="btn" to="/login">
-                  Se connecter
+                  {t("Log_in")}
                 </Link>
               </div>
             </div>
@@ -316,7 +317,7 @@ export const Home = () => {
         <div className="wrapper">
           {/* <!-- section OFFRES EN VEDETTE : présentation des offres en vedette --> */}
           <section>
-            <h2>Offres en vedette</h2>
+            <h2> {t("Featured_offers")}</h2>
             <div className="grid grid--5">
               <div className="tile bg--tile">
                 <div className="tile__container">
@@ -342,14 +343,14 @@ export const Home = () => {
                   </div>
                   <h3>CYPRUS 95 LH</h3>
                   <p className="tile__text">
-                    Mise courante | <span>1&nbsp;offre</span>
+                    {t("Current")} | <span>1&nbsp;{t("offer")}</span>
                   </p>
                   <span>10.50$</span>
                   <p className="tile__text-small">
-                    <small>dernière offre par user2024</small>
+                    <small>{t("Last_offer_by_user2024")}</small>
                   </p>
                   <Link className="btn tile__btn" to="enchere.html">
-                    Miser
+                    {t("Bet")}
                   </Link>
                 </div>
               </div>
@@ -370,14 +371,14 @@ export const Home = () => {
                   </div>
                   <h3>US California Scott #1</h3>
                   <p className="tile__text">
-                    Mise courante | <span>5&nbsp;offres</span>
+                    {t("Current")} | <span>5&nbsp;{t("offers")}</span>
                   </p>
                   <span>259.00$</span>
                   <p className="tile__text-small">
-                    <small>dernière offre par user2024</small>
+                    <small>{t("Last_offer_by_user2024")}</small>
                   </p>
                   <Link className="btn tile__btn" to="enchere.html">
-                    Miser
+                    {t("Bet")}
                   </Link>
                 </div>
               </div>
@@ -398,14 +399,14 @@ export const Home = () => {
                   </div>
                   <h3>USA 1857 Scott #36 Used. Deep color</h3>
                   <p className="tile__text">
-                    Mise courante | <span>10&nbsp;offres</span>
+                    {t("Current")} | <span>10&nbsp;{t("offers")}</span>
                   </p>
                   <span>79.00$</span>
                   <p className="tile__text-small">
-                    <small>dernière offre par user2024</small>
+                    <small>{t("Last_offer_by_user2024")}</small>
                   </p>
                   <Link className="btn tile__btn" to="enchere.html">
-                    Miser
+                    {t("Bet")}
                   </Link>
                 </div>
               </div>
@@ -431,14 +432,14 @@ export const Home = () => {
                   </div>
                   <h3>AFFORDABLE GENUINE SCOTT USED SET</h3>
                   <p className="tile__text">
-                    Mise courante | <span>2&nbsp;offres</span>
+                    {t("Current")} | <span>2&nbsp;{t("offers")}</span>
                   </p>
                   <span>150.00$</span>
                   <p className="tile__text-small">
-                    <small>dernière offre par user2024</small>
+                    <small>{t("Last_offer_by_user2024")}</small>
                   </p>
                   <Link className="btn tile__btn" to="enchere.html">
-                    Miser
+                    {t("Bet")}
                   </Link>
                 </div>
               </div>
@@ -459,14 +460,17 @@ export const Home = () => {
                   </div>
                   <h3>Used 50¢ XF Well Centered GEM With PFC Graded</h3>
                   <p className="tile__text">
-                    Mise courante | <span>Aucune&nbsp;offre</span>
+                    {t("Current")} |{" "}
+                    <span>
+                      {t("None")}&nbsp;{t("offer")}
+                    </span>
                   </p>
                   <span>10.00$</span>
                   <p className="tile__text-small">
-                    <small>dernière offre par user2024</small>
+                    <small>{t("Last_offer_by_user2024")}</small>
                   </p>
                   <Link className="btn tile__btn" to="enchere.html">
-                    Miser
+                    {t("Bet")}
                   </Link>
                 </div>
               </div>
@@ -475,30 +479,30 @@ export const Home = () => {
 
           {/* <!-- section CATEGORIES : présentation des catégories --> */}
           <section>
-            <h2>Catégories</h2>
+            <h2>{t("Categories")}</h2>
             <div className="grid grid--3">
               <div className="tile tile--center bg--tile">
                 <div className="tile__img-container tile__img-container--first">
-                  <h3>Les plus populaire</h3>
+                  <h3>{t("Most_popular")}</h3>
                 </div>
                 <Link className="btn" to="#">
-                  Voir tout
+                  {t("See_all")}
                 </Link>
               </div>
               <div className="tile tile--center bg--tile">
                 <div className="tile__img-container tile__img-container--second">
-                  <h3>Bientôt terminées</h3>
+                  <h3>{t("Ending_soon")}</h3>
                 </div>
                 <Link className="btn" to="#">
-                  Voir tout
+                  {t("See_all")}
                 </Link>
               </div>
               <div className="tile tile--center bg--tile">
                 <div className="tile__img-container tile__img-container--third">
-                  <h3>Nouvelles offres</h3>
+                  <h3>{t("New_offers")}</h3>
                 </div>
                 <Link className="btn" to="#">
-                  Voir tout
+                  {t("See_all")}
                 </Link>
               </div>
             </div>
@@ -507,19 +511,19 @@ export const Home = () => {
         {/* <!-- section ACTUALITÉS : présentation des actualités récentes --> */}
         <section className="bg--blue">
           <div className="wrapper">
-            <h2 className="bg--blue-title">Actualités</h2>
-            <h3 className="bg--blue-title">Récemment publié</h3>
+            <h2 className="bg--blue-title">{t("News")}</h2>
+            <h3 className="bg--blue-title">{t("Recently_published")}</h3>
             <div className="grid grid--3-var">
               <div className="tile bg--tile-white">
-                <small>Publié le 06/04/2024</small>
+                <small>{t("Published")} 06/04/2024</small>
                 <div className="tile__container">
                   <img src={article1} alt="" />
                   <Link className="btn" to="#">
-                    Lire l'article
+                    {t("Read_the_article")}
                   </Link>
                 </div>
-                <h4>Comment j'ai appris à regarder les timbres</h4>
-                <small>Par Lord Réginald Stampee</small>
+                <h4>{t("How_I_learned_to_look_at_stamps")}</h4>
+                <small>{t("Reginald")}</small>
                 <p>
                   Nisi scelerisque eu ultrices vitae auctor eu augue ut lectus.
                   Sit amet cursus sit amet. Leo vel orci porta non pulvinar
@@ -527,15 +531,15 @@ export const Home = () => {
                 </p>
               </div>
               <div className="tile bg--tile-white">
-                <small>Publié le 05/04/2024</small>
+                <small>{t("Published")} 05/04/2024</small>
                 <div className="tile__container">
                   <img src={article2} alt="" />
                   <Link className="btn" to="#">
-                    Lire l'article
+                    {t("Read_the_article")}
                   </Link>
                 </div>
-                <h4>Paradis des enchères - Une heure à Londre</h4>
-                <small>Par Lord Réginald Stampee</small>
+                <h4> {t("Auction_paradise_An_hour_in_London")}</h4>
+                <small>{t("Reginald")}</small>
                 <p>
                   Nisi scelerisque eu ultrices vitae auctor eu augue ut lectus.
                   Sit amet cursus sit amet. Leo vel orci porta non pulvinar
@@ -546,7 +550,7 @@ export const Home = () => {
                 <Link to="#">
                   <div className="tile__container bg--no-bg">
                     <img width="75" src={timbre} alt="Icone d'un timbre" />
-                    <p className="link--border">Timbres</p>
+                    <p className="link--border">{t("Stamps")}</p>
                     <img
                       className="icone-link-arrow"
                       src={linkArrow}
@@ -557,7 +561,7 @@ export const Home = () => {
                 <Link to="#">
                   <div className="tile__container bg--no-bg">
                     <img width="75" src={enchere} alt="Icone d'un marteau" />
-                    <p className="link--border">Enchères</p>
+                    <p className="link--border">{t("Auction")}</p>
                     <img
                       className="icone-link-arrow"
                       src={linkArrow}
@@ -587,7 +591,7 @@ export const Home = () => {
         <div className="wrapper">
           {/* <!-- section NOTRE MISSION : présentation du lord --> */}
           <section>
-            <h2>Notre mission</h2>
+            <h2>{t("Our_mission")}</h2>
             <div className="grid grid--2">
               <div className="tile bg--tile">
                 <div className="tile__container-text-img">
@@ -597,30 +601,20 @@ export const Home = () => {
                     alt=""
                   />
                   <div className="tile__container-text">
-                    <h3>Une plateforme pour les passionné(e)s</h3>
-                    <p>
-                      Lord Reginald Stampee, duc de Worcessteshear et
-                      philatéliste depuis sa tendre enfance au milieu des années
-                      cinquante, Venenatis urna cursuse nunc scelerisque viverra
-                      mauris in. Dolor sit amet consectetur adipiscing purus
-                      sit. Vel pharetra vel turpis nunc eget lorem dolor sed.
-                      Vitae congue
-                    </p>
+                    <h3> {t("A_platform_for_enthusiasts")}</h3>
+                    <p>{t("Lord_Reginald_Stampee")}</p>
                     <Link className="btn" to="#">
-                      Lire la suite
+                      {t("more")}
                     </Link>
                   </div>
                 </div>
               </div>
               <div className="tile tile--center bg--tile">
                 <div className="tile__img-container bg--blue">
-                  <p className="tile--center-text">
-                    Notre équipe est toujours prête à répondre à vos questions
-                    dans les plus bref délais !
-                  </p>
+                  <p className="tile--center-text">{t("Our_team")}</p>
                 </div>
                 <Link className="btn" to="#">
-                  Contactez-nous
+                  {t("Contact_us")}
                 </Link>
               </div>
             </div>

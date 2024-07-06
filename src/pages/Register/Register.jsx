@@ -4,10 +4,12 @@ import logo from "../../img/png/logo.png";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { useTranslation } from "react-i18next";
 
 export const Register = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,14 +53,14 @@ export const Register = () => {
           </Link>
         </div>
         <div className="login-box">
-          <h2>Se connecter</h2>
+          <h2>{t("CREATE")}</h2>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="nom">Nom</label>
+            <label htmlFor="nom">{t("Name")}</label>
             <input type="text" id="nom" name="nom" required />
-            <label htmlFor="email">Courriel</label>
+            <label htmlFor="email">{t("E_mail")}</label>
             <input type="email" id="email" name="email" required />
 
-            <label htmlFor="password">Mot de passe</label>
+            <label htmlFor="password">{t("Password")}</label>
             <input type="password" id="password" name="password" required />
 
             <input
@@ -66,7 +68,7 @@ export const Register = () => {
               value="Crée un compte"
               className="login_submit"
             />
-            {err && <span>Something went wrong</span>}
+            {err && <span>{t("try_again")}</span>}
           </form>
         </div>
       </div>

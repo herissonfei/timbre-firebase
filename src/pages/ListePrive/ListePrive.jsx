@@ -8,9 +8,9 @@ import { Nav } from "../../components/Nav/Nav";
 import { Footer } from "../../components/Footer/Footer";
 import { AuthContext } from "../../context/AuthContext";
 import { MenuContext } from "../../context/MenuContext";
+import { useTranslation } from "react-i18next";
 
 import { RechercheContext } from "../../context/RechercheContext";
-
 import { db, auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 
@@ -33,6 +33,8 @@ import dropdown from "../../img/png/icone-dropdown-arrow-blue.png";
 import logo from "../../img/png/logo.png";
 
 export const ListePrive = () => {
+  const { t } = useTranslation();
+
   const { currentUser } = useContext(AuthContext);
   // const [user, setUser] = useState([]);
 
@@ -128,7 +130,7 @@ export const ListePrive = () => {
 
   // checkbox TYPE
   const [selectedCategoriesTypes, setSelectedCategoriesTypes] = useState([]);
-
+  // ----------------------------------------------------------------------------------never used
   const handleCheckboxchangeTypes = (category) => {
     if (selectedCategoriesTypes.includes(category)) {
       setSelectedCategoriesTypes(
@@ -233,6 +235,7 @@ export const ListePrive = () => {
     selectedOption,
     // currentUser.uid,
     currentUser,
+    toggleRecherche,
   ]);
   const handleParDefault = (event) => {
     event.preventDefault();
@@ -336,7 +339,7 @@ export const ListePrive = () => {
           aria-label="search-bar-input"
         >
           <div className="input-bar__text">
-            <p>Avancée</p>
+            <p>{t("Advanced")}</p>
             <img
               className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
               src={dropdown}
@@ -367,75 +370,75 @@ export const ListePrive = () => {
 
           <ul className="menu__list menu__list--mobile">
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="/catalogue">
-                Catalogue d'enchères
-              </a>
+              <Link className="menu__link" to="/catalogue">
+                {t("catalog")}
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="catalogue-enchere.html">
-                    En cours
-                  </a>
+                  <Link className="menu__link" to="catalogue-enchere.html">
+                    {t("progress")}
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="catalogue-enchere.html">
+                  <Link className="menu__link" to="catalogue-enchere.html">
                     Archive
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="#">
+              <Link className="menu__link" to="#">
                 Fonctionnement
-              </a>
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     Termes et conditions
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     Aide
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     Contactez le webmestre
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="">
+              <Link className="menu__link" to="">
                 À propos de Lord Réginald Stampee III
-              </a>
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     La philatélie, c'est la vie.
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     Biographie du Lord
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     Historique familial
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="#">
+              <Link className="menu__link" to="#">
                 contactez-nous
-              </a>
+              </Link>
             </li>
           </ul>
-          <a href="/home">
+          <Link to="/home">
             <img className="footer__logo" src={logo} alt="logo Stampee" />
-          </a>
+          </Link>
 
           {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile ">
             <li className="menu__item">
@@ -505,7 +508,7 @@ export const ListePrive = () => {
             <ul className="menu-secondaire__container">
               <li className="menu__item menu__item--principal">
                 <Link className="menu__link" to="#">
-                  En cours
+                  {t("progress")}
                 </Link>
               </li>
               <li className="menu__item menu__item--principal">
@@ -521,11 +524,11 @@ export const ListePrive = () => {
               onChange={handleSortChange}
             >
               {/* <option disabled>Trier</option> */}
-              <option value="tous">Tous</option>
+              <option value="tous">{t("All")}</option>
               <option value="decroissant">
-                Prix décroissant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {t("Descending_price")}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </option>
-              <option value="croissant">Prix croissant</option>
+              <option value="croissant">{t("Ascending_price")}</option>
               {/* <option value="popularite">Par popularité</option> */}
               {/* 这里的css得改动一下 */}
               {/* <option value="nouvellement-liste">Nouvellement listée</option> */}
@@ -546,7 +549,7 @@ export const ListePrive = () => {
             aria-label="burger"
             data-js-search
           >
-            Recherche Avancée
+            {t("Advanced_search")}
             <img width="5" src={linkArrow} alt="fleche dropwdown" />
           </button>
         </div>
@@ -564,7 +567,7 @@ export const ListePrive = () => {
           <div className="wrapper--header">
             {/* <!-- RECHERCHE AVANCÉE --> */}
             <div className="search-bar search-bar--desktop">
-              <h2>Recherche Avancée</h2>
+              <h2>{t("Advanced_search")}</h2>
               <form method="GET">
                 <section>
                   <h3>Condition</h3>
@@ -577,7 +580,7 @@ export const ListePrive = () => {
                       )}
                       onChange={() => handleCategoryChange("Parfaite")}
                     />
-                    <label htmlFor="parfaite">Parfaite</label>
+                    <label htmlFor="parfaite">{t("Perfect")}</label>
                   </div>
                   <div>
                     <input
@@ -588,7 +591,7 @@ export const ListePrive = () => {
                       )}
                       onChange={() => handleCategoryChange("Excellente")}
                     />
-                    <label htmlFor="excellente">Excellente</label>
+                    <label htmlFor="excellente">{t("Excellent")}</label>
                   </div>
                   <div>
                     <input
@@ -597,7 +600,7 @@ export const ListePrive = () => {
                       checked={selectedCategoriesConditions.includes("Bonne")}
                       onChange={() => handleCategoryChange("Bonne")}
                     />
-                    <label htmlFor="bonne">Bonne</label>
+                    <label htmlFor="bonne">{t("Good")}</label>
                   </div>
                   <div>
                     <input
@@ -606,7 +609,7 @@ export const ListePrive = () => {
                       checked={selectedCategoriesConditions.includes("Moyenne")}
                       onChange={() => handleCategoryChange("Moyenne")}
                     />
-                    <label htmlFor="moyenne">Moyenne</label>
+                    <label htmlFor="moyenne">{t("Average")}</label>
                   </div>
                   <div>
                     <input
@@ -617,28 +620,28 @@ export const ListePrive = () => {
                       )}
                       onChange={() => handleCategoryChange("Endommagé")}
                     />
-                    <label htmlFor="endommage">Endommagé</label>
+                    <label htmlFor="endommage">{t("Damaged")}</label>
                   </div>
                 </section>
                 <section>
-                  <h3>Pays d'origine</h3>
+                  <h3>{t("country")}</h3>
                   <select
                     aria-label="select-country"
                     value={selectedOption}
                     onChange={handleSelectChange}
                   >
-                    <option value="tous">Tous les pays</option>
-                    <option value="Royaume-uni">Royaume-Uni</option>
-                    <option value="Etats-unis">États-unis</option>
+                    <option value="tous">{t("All_countries")}</option>
+                    <option value="Royaume-uni">{t("United_Kingdom")}</option>
+                    <option value="Etats-unis">{t("UNITED_STATES")}</option>
                     <option value="Canada">Canada</option>
-                    <option value="Australie">Australie</option>
-                    <option value="Chine">Chine</option>
+                    <option value="Australie">{t("Australia")}</option>
+                    <option value="Chine">{t("China")}</option>
                     <option value="France">France</option>
-                    <option value="Espagne">Espagne</option>
+                    <option value="Espagne">{t("Spain")}</option>
                   </select>
                 </section>
                 <section>
-                  <h3>Prix</h3>
+                  <h3>{t("Price")}</h3>
                   <div className="wrapper--header">
                     <div className="wrapper--header">
                       <input
@@ -784,7 +787,7 @@ export const ListePrive = () => {
                       to="#"
                       onClick={handleParDefault}
                     >
-                      Par défaut
+                      {t("default")}
                       <img
                         width="15"
                         src={roundArrow}
@@ -796,7 +799,7 @@ export const ListePrive = () => {
                       to="#"
                       onClick={handleChercher}
                     >
-                      Chercher
+                      {t("search")}
                     </Link>
                   </div>
                 </div>
@@ -846,7 +849,7 @@ export const ListePrive = () => {
                         )}
                         onChange={() => handleCategoryChange("Parfaite")}
                       />
-                      <label htmlFor="parfaite">Parfaite</label>
+                      <label htmlFor="parfaite">{t("Perfect")}</label>
                     </div>
                     <div>
                       <input
@@ -857,7 +860,7 @@ export const ListePrive = () => {
                         )}
                         onChange={() => handleCategoryChange("Excellente")}
                       />
-                      <label htmlFor="excellente">Excellente</label>
+                      <label htmlFor="excellente">{t("Excellent")}</label>
                     </div>
                     <div>
                       <input
@@ -866,7 +869,7 @@ export const ListePrive = () => {
                         checked={selectedCategoriesConditions.includes("Bonne")}
                         onChange={() => handleCategoryChange("Bonne")}
                       />
-                      <label htmlFor="bonne">Bonne</label>
+                      <label htmlFor="bonne">{t("Good")}</label>
                     </div>
                     <div>
                       <input
@@ -877,7 +880,7 @@ export const ListePrive = () => {
                         )}
                         onChange={() => handleCategoryChange("Moyenne")}
                       />
-                      <label htmlFor="moyenne">Moyenne</label>
+                      <label htmlFor="moyenne">{t("Average")}</label>
                     </div>
                     <div>
                       <input
@@ -888,24 +891,24 @@ export const ListePrive = () => {
                         )}
                         onChange={() => handleCategoryChange("Endommagé")}
                       />
-                      <label htmlFor="endommage">Endommagé</label>
+                      <label htmlFor="endommage">{t("Damaged")}</label>
                     </div>
                   </section>
                   <section>
-                    <h3>Pays d'origine</h3>
+                    <h3>{t("country")}</h3>
                     <select aria-label="mobile-select-country">
-                      <option value="tous">Tous les pays</option>
-                      <option value="royaume-uni">Royaume-Uni</option>
-                      <option value="etats-unis">États-unis</option>
+                      <option value="tous">{t("All_countries")}</option>
+                      <option value="royaume-uni">{t("United_Kingdom")}</option>
+                      <option value="etats-unis">{t("UNITED_STATES")}</option>
                       <option value="canada">Canada</option>
-                      <option value="australie">Australie</option>
-                      <option value="chine">Chine</option>
+                      <option value="australie">{t("Australia")}</option>
+                      <option value="chine">{t("China")}</option>
                       <option value="france">France</option>
-                      <option value="espagne">Espagne</option>
+                      <option value="espagne">{t("Spain")}</option>
                     </select>
                   </section>
                   <section>
-                    <h3>Prix</h3>
+                    <h3>{t("Price")}</h3>
                     <div className="wrapper--header">
                       <div className="wrapper--header">
                         <input type="number" name="prix" />
@@ -974,7 +977,7 @@ export const ListePrive = () => {
                   <div className="wrapper--header-mobile">
                     <div>
                       <Link className="btn btn--text-icone default">
-                        Par défaut
+                        {t("default")}
                         <img src={roundArrow} alt="icone fleche par defaut" />
                       </Link>
                       <Link
@@ -982,7 +985,7 @@ export const ListePrive = () => {
                         to="#"
                         onClick={handleChercher}
                       >
-                        Chercher
+                        {t("search")}
                       </Link>
                     </div>
                   </div>
@@ -993,9 +996,10 @@ export const ListePrive = () => {
           <!-- CATALOGUE ENCHÈRES --> */}
             <div className="wrapper--gallery">
               <p className="gallery__text">
-                {bidsPrive.length} enchères trouvées | {(currentPage - 1) * 10}{" "}
-                - {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10}{" "}
-                de {bidsCount}
+                {bidsPrive.length} {t("auctions_found")} |{" "}
+                {(currentPage - 1) * 10} -{" "}
+                {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10}{" "}
+                {t("of")} {bidsCount}
               </p>
               <div className="grid grid--5-var">
                 {/* --------------------------------------------------------------------------------------- */}
@@ -1034,14 +1038,16 @@ export const ListePrive = () => {
                       <p>{bid.country}</p> */}
 
                       <p className="tile__text">
-                        Mise courante |{" "}
-                        <span>{bid.auctioncount}&nbsp;offre</span>
+                        {t("Current")} |{" "}
+                        <span>
+                          {bid.auctioncount}&nbsp;{t("offer")}
+                        </span>
                       </p>
                       <span>{bid.reserveprice}$</span>
                       <p className="tile__text-small">
                         <small>
                           {/* 回过头看 */}
-                          dernière offre par user2024
+                          {t("Last_offer_by_user2024")}
                         </small>
                       </p>
                       <Link
@@ -1049,7 +1055,7 @@ export const ListePrive = () => {
                         to="#"
                         onClick={() => delData(bid)}
                       >
-                        Supprimer
+                        {t("DELETE")}
                       </Link>
                     </div>
                   </div>
@@ -1113,9 +1119,10 @@ export const ListePrive = () => {
             />
             <p className="gallery__text gallery__text--right">
               {/* {bidsCount} enchères trouvées | 0 - 20 de {bidsCount} */}
-              {bidsPrive.length} enchères trouvées | {(currentPage - 1) * 10} -{" "}
-              {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10} de{" "}
-              {bidsCount}
+              {bidsPrive.length} {t("auctions_found")} |{" "}
+              {(currentPage - 1) * 10} -{" "}
+              {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10}{" "}
+              {t("of")} {bidsCount}
             </p>
           </div>
         </div>

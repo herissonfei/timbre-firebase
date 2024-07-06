@@ -9,6 +9,7 @@ import { Pagination } from "../../components/Pagination";
 import { MenuContext } from "../../context/MenuContext";
 import { RechercheContext } from "../../context/RechercheContext";
 import { signOut } from "firebase/auth";
+import { useTranslation } from "react-i18next";
 import { db, auth } from "../../firebase";
 
 // img
@@ -32,6 +33,8 @@ import {
 import "./Catalogue.css";
 
 export const Catalogue = () => {
+  const { t } = useTranslation();
+
   const [bidsData, setBidsData] = useState([]);
 
   const [bids, setBids] = useState([]);
@@ -311,7 +314,7 @@ export const Catalogue = () => {
           aria-label="search-bar-input"
         >
           <div className="input-bar__text">
-            <p>Avancée</p>
+            <p>{t("Advanced")}</p>
             <img
               className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
               src={dropdown}
@@ -343,12 +346,12 @@ export const Catalogue = () => {
           <ul className="menu__list menu__list--mobile">
             <li className="menu__item menu__item--principal">
               <a className="menu__link" href="/catalogue">
-                Catalogue d'enchères
+                {t("catalog")}
               </a>
               <ul className="menu__dropdown">
                 <li className="menu__item">
                   <a className="menu__link" href="catalogue-enchere.html">
-                    En cours
+                    {t("progress")}
                   </a>
                 </li>
                 <li className="menu__item">
@@ -360,51 +363,51 @@ export const Catalogue = () => {
             </li>
             <li className="menu__item menu__item--principal">
               <a className="menu__link" href="#">
-                Fonctionnement
+                {t("Functioning")}
               </a>
               <ul className="menu__dropdown">
                 <li className="menu__item">
                   <a className="menu__link" href="#">
-                    Termes et conditions
+                    {t("Terms_conditions")}
                   </a>
                 </li>
                 <li className="menu__item">
                   <a className="menu__link" href="#">
-                    Aide
+                    {t("Help")}
                   </a>
                 </li>
                 <li className="menu__item">
                   <a className="menu__link" href="#">
-                    Contactez le webmestre
+                    {t("Contact_the_webmaster")}
                   </a>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
               <a className="menu__link" href="">
-                À propos de Lord Réginald Stampee III
+                {t("propos")}
               </a>
               <ul className="menu__dropdown">
                 <li className="menu__item">
                   <a className="menu__link" href="#">
-                    La philatélie, c'est la vie.
+                    {t("Philately_is_life")}
                   </a>
                 </li>
                 <li className="menu__item">
                   <a className="menu__link" href="#">
-                    Biographie du Lord
+                    {t("Lords_biography")}
                   </a>
                 </li>
                 <li className="menu__item">
                   <a className="menu__link" href="#">
-                    Historique familial
+                    {t("Family_history")}
                   </a>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
               <a className="menu__link" href="#">
-                contactez-nous
+                {t("Contact_us")}
               </a>
             </li>
           </ul>
@@ -430,7 +433,7 @@ export const Catalogue = () => {
                 </li>
                 <li className="menu__item divid">
                   <Link className="navEntete-link" to="/publish">
-                    publier une enchère
+                    {t("post")}
                   </Link>
                 </li>
               </div>
@@ -438,13 +441,13 @@ export const Catalogue = () => {
               <div>
                 <li className="menu__item">
                   <Link className="" onClick={() => signOut(auth)}>
-                    Se déconnecter
+                    {t("Sign_out")}
                   </Link>
                 </li>
 
                 <li className="menu__item">
                   <Link className="navEntete-link" to="/listePrive">
-                    mes enchères
+                    {t("my_auctions")}
                   </Link>
                 </li>
               </div>
@@ -452,7 +455,7 @@ export const Catalogue = () => {
           ) : (
             <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile mobile--login">
               <li className="menu__item">
-                <Link to="/login">Se connecter</Link>
+                <Link to="/login">{t("Log_in")}</Link>
               </li>
               <li className="menu__item">
                 <Link to="/register">Devenir membre</Link>
@@ -463,10 +466,10 @@ export const Catalogue = () => {
         {/* <!-- HERO --> */}
         <div className="hero hero--page-interieure">
           <div className="wrapper">
-            <h1 className="hero__text">Parcourez nos enchères</h1>
-            <h2 className="hero__text--sous-titre">Trouvez la perle rare</h2>
+            <h1 className="hero__text">{t("BROWSE")}</h1>
+            <h2 className="hero__text--sous-titre">{t("PEARL")}</h2>
             <Link className="btn" to="#">
-              Fonctionnement
+              {t("Functioning")}
             </Link>
             <Link className="btn" to="#">
               Certification
@@ -480,7 +483,7 @@ export const Catalogue = () => {
             <ul className="menu-secondaire__container">
               <li className="menu__item menu__item--principal">
                 <Link className="menu__link" to="#">
-                  En cours
+                  {t("progress")}
                 </Link>
               </li>
               <li className="menu__item menu__item--principal">
@@ -496,9 +499,9 @@ export const Catalogue = () => {
               onChange={handleSortChange}
             >
               {/* <option disabled>Trier</option> */}
-              <option value="tous">Tous</option>
+              <option value="tous">{t("All")}</option>
               <option value="decroissant">
-                Prix décroissant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {t("Descending_price")}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </option>
               <option value="croissant">Prix croissant</option>
               {/* <option value="popularite">Par popularité</option> */}
@@ -552,7 +555,7 @@ export const Catalogue = () => {
                       )}
                       onChange={() => handleCategoryChange("Parfaite")}
                     />
-                    <label htmlFor="parfaite">Parfaite</label>
+                    <label htmlFor="parfaite">{t("Perfect")}</label>
                   </div>
                   <div>
                     <input
@@ -563,7 +566,7 @@ export const Catalogue = () => {
                       )}
                       onChange={() => handleCategoryChange("Excellente")}
                     />
-                    <label htmlFor="excellente">Excellente</label>
+                    <label htmlFor="excellente">{t("Excellent")}</label>
                   </div>
                   <div>
                     <input
@@ -572,7 +575,7 @@ export const Catalogue = () => {
                       checked={selectedCategoriesConditions.includes("Bonne")}
                       onChange={() => handleCategoryChange("Bonne")}
                     />
-                    <label htmlFor="bonne">Bonne</label>
+                    <label htmlFor="bonne">{t("Good")}</label>
                   </div>
                   <div>
                     <input
@@ -581,7 +584,7 @@ export const Catalogue = () => {
                       checked={selectedCategoriesConditions.includes("Moyenne")}
                       onChange={() => handleCategoryChange("Moyenne")}
                     />
-                    <label htmlFor="moyenne">Moyenne</label>
+                    <label htmlFor="moyenne">{t("Average")}</label>
                   </div>
                   <div>
                     <input
@@ -592,28 +595,28 @@ export const Catalogue = () => {
                       )}
                       onChange={() => handleCategoryChange("Endommagé")}
                     />
-                    <label htmlFor="endommage">Endommagé</label>
+                    <label htmlFor="endommage">{t("Damaged")}</label>
                   </div>
                 </section>
                 <section>
-                  <h3>Pays d'origine</h3>
+                  <h3>{t("country")}</h3>
                   <select
                     aria-label="select-country"
                     value={selectedOption}
                     onChange={handleSelectChange}
                   >
-                    <option value="tous">Tous les pays</option>
-                    <option value="Royaume-uni">Royaume-Uni</option>
-                    <option value="Etats-unis">États-unis</option>
+                    <option value="tous">{t("All_countries")}</option>
+                    <option value="Royaume-uni">{t("United_Kingdom")}</option>
+                    <option value="Etats-unis">{t("UNITED_STATES")}</option>
                     <option value="Canada">Canada</option>
-                    <option value="Australie">Australie</option>
-                    <option value="Chine">Chine</option>
+                    <option value="Australie">{t("Australia")}</option>
+                    <option value="Chine">{t("China")}</option>
                     <option value="France">France</option>
-                    <option value="Espagne">Espagne</option>
+                    <option value="Espagne">{t("Spain")}</option>
                   </select>
                 </section>
                 <section>
-                  <h3>Prix</h3>
+                  <h3>{t("Price")}</h3>
                   <div className="wrapper--header">
                     <div className="wrapper--header">
                       <input
@@ -758,7 +761,7 @@ export const Catalogue = () => {
                       to="#"
                       onClick={handleParDefault}
                     >
-                      Par défaut
+                      {t("default")}
                       <img
                         width="15"
                         src={roundArrow}
@@ -770,7 +773,7 @@ export const Catalogue = () => {
                       to="#"
                       onClick={handleChercher}
                     >
-                      Chercher
+                      {t("search")}
                     </Link>
                   </div>
                 </div>
@@ -967,9 +970,9 @@ export const Catalogue = () => {
           <!-- CATALOGUE ENCHÈRES --> */}
             <div className="wrapper--gallery">
               <p className="gallery__text">
-                {bids.length} enchères trouvées | {(currentPage - 1) * 10} -{" "}
-                {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10} de{" "}
-                {bidsCount}
+                {bids.length} {t("auctions_found")} | {(currentPage - 1) * 10} -{" "}
+                {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10}{" "}
+                {t("of")} {bidsCount}
               </p>
               <div className="grid grid--5-var">
                 {/* --------------------------------------------------------------------------------------- */}
@@ -1008,18 +1011,18 @@ export const Catalogue = () => {
                       <p>{bid.country}</p> */}
 
                       <p className="tile__text">
-                        Mise courante |{" "}
-                        <span>{bid.auctioncount}&nbsp;offre</span>
+                        {t("Current")} |{" "}
+                        <span>{bid.auctioncount}&nbsp; {t("offer")}</span>
                       </p>
                       <span>{bid.reserveprice}$</span>
                       <p className="tile__text-small">
                         <small>
                           {/* 回过头看 */}
-                          dernière offre par user2024
+                           {t("Last_offer_by_user2024")}
                         </small>
                       </p>
                       <Link className="btn tile__btn" to={`/enchere/${bid.id}`}>
-                        Miser
+                         {t("Bet")}
                       </Link>
                     </div>
                   </div>
@@ -1082,9 +1085,9 @@ export const Catalogue = () => {
               changeClass="false"
             />
             <p className="gallery__text gallery__text--right">
-              {bids.length} enchères trouvées | {(currentPage - 1) * 10} -{" "}
-              {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10} de{" "}
-              {bidsCount}
+              {bids.length} {t("auctions_found")} | {(currentPage - 1) * 10} -{" "}
+              {currentPage * 10 > bidsCount ? bidsCount : currentPage * 10}{" "}
+              {t("of")} {bidsCount}
             </p>
           </div>
         </div>

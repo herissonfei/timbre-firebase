@@ -7,10 +7,12 @@ import { AuthContext } from "../../context/AuthContext";
 import "./Publish.css";
 import logo from "../../img/png/logo.png";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const Publish = () => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // const [user, setUser] = useState([]);
   const stampId = uuid();
@@ -160,7 +162,7 @@ export const Publish = () => {
 
                 <div className="form-group">
                   <label className="labelForm" htmlFor="startdate">
-                    startdate:
+                    {t("start_date")}:
                   </label>
                   <input
                     type="date"
@@ -172,7 +174,7 @@ export const Publish = () => {
 
                 <div className="form-group">
                   <label className="labelForm" htmlFor="enddate">
-                    enddate:
+                    {t("end_date")}:
                   </label>
                   <input
                     type="date"
@@ -183,7 +185,7 @@ export const Publish = () => {
                 </div>
                 <div className="form-group">
                   <label className="labelForm" htmlFor="favorites">
-                    favorites:
+                    {t("favorite")}:
                   </label>
                   <input
                     type="text"
@@ -195,7 +197,7 @@ export const Publish = () => {
 
                 <div className="form-group">
                   <label className="labelForm" htmlFor="stampName">
-                    name:
+                    {t("Name")}:
                   </label>
                   <input
                     type="text"
@@ -207,7 +209,7 @@ export const Publish = () => {
 
                 <div className="form-group">
                   <label className="labelForm" htmlFor="creationdate">
-                    creationdate:
+                    {t("Creation_date")}:
                   </label>
                   <input
                     type="date"
@@ -218,7 +220,7 @@ export const Publish = () => {
                 </div>
                 <div className="form-group">
                   <label className="labelForm" htmlFor="bidtime">
-                    bidtime:
+                    {t("Bid_time")}:
                   </label>
                   <input
                     type="date"
@@ -229,7 +231,7 @@ export const Publish = () => {
                 </div>
                 <div className="form-group">
                   <label className="labelForm" htmlFor="startingprice">
-                    startingprice:
+                    {t("Starting_price")}:
                   </label>
                   <input
                     type="number"
@@ -240,7 +242,7 @@ export const Publish = () => {
                 </div>
                 <div className="form-group">
                   <label className="labelForm" htmlFor="reserveprice">
-                    reserveprice:
+                    {t("Reserve_price")}:
                   </label>
                   <input
                     type="number"
@@ -283,7 +285,7 @@ export const Publish = () => {
 
                 <div className="form-group">
                   <label className="labelForm" htmlFor="status">
-                    status:
+                    {t("status")}:
                   </label>
                   <input
                     type="text"

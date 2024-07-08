@@ -1,4 +1,4 @@
-[Version Français](#Français)
+# Version Français
 # user manual
 
 ## Home page
@@ -14,7 +14,7 @@
 ## Catalog Page
 ![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/8b053b95-94f2-421b-bc98-140e125fb033)
 
-1:Sort by different options, such as price.
+1: Sort by different options, such as price.
 
 2: Pagination: you can view the previous page or the next page or go directly to the stamps on a specific page. Each page can display up to 20 stamp auctions.
 
@@ -23,7 +23,7 @@
 4: Go to the auction details page.
 
 
-# Version Français
+[Version Français](#Français)
 # guide d'utilisation
 
 ## Page d'accueil

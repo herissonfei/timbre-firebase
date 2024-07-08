@@ -1,4 +1,4 @@
-# Version Français
+[Version francais](#francais)
 [Version mobile](#mobile)
 # user manual
 
@@ -23,8 +23,9 @@
 
 4: Go to the auction details page.
 
+# francais
 # mobile
-[Version Français](#Français)
+
 # guide d'utilisation
 
 ## Page d'accueil

@@ -345,82 +345,82 @@ export const Catalogue = () => {
 
           <ul className="menu__list menu__list--mobile">
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="/catalogue">
+              <Link className="menu__link" to="/catalogue">
                 {t("catalog")}
-              </a>
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="catalogue-enchere.html">
+                  <Link className="menu__link" to="catalogue-enchere.html">
                     {t("progress")}
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="catalogue-enchere.html">
+                  <Link className="menu__link" to="catalogue-enchere.html">
                     Archive
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="#">
+              <Link className="menu__link" to="#">
                 {t("Functioning")}
-              </a>
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     {t("Terms_conditions")}
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     {t("Help")}
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     {t("Contact_the_webmaster")}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="">
+              <Link className="menu__link" to="">
                 {t("propos")}
-              </a>
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     {t("Philately_is_life")}
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     {t("Lords_biography")}
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
+                  <Link className="menu__link" to="#">
                     {t("Family_history")}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="#">
+              <Link className="menu__link" to="#">
                 {t("Contact_us")}
-              </a>
+              </Link>
             </li>
           </ul>
-          <a href="/home">
+          <Link to="/home">
             <img className="footer__logo" src={logo} alt="logo Stampee" />
-          </a>
+          </Link>
 
           {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile ">
             <li className="menu__item">
-              <a href="{{ route('login') }}">Se connecter</a>
+              <a to="{{ route('login') }}">Se connecter</a>
             </li>
             <li className="menu__item">
-              <a href="{{ route('register') }}">Devenir membre</a>
+              <a to="{{ route('register') }}">Devenir membre</a>
             </li>
           </ul> */}
           {currentUser ? (

@@ -115,9 +115,9 @@ export const Header = () => {
       </header>
       <nav className="menu">
         <div className="menu__logo">
-          <a href="/home">
+          <Link href="/home">
             <img src={logo} alt="logo Stampee" />
-          </a>
+          </Link>
         </div>
         <div className="input-bar input-bar--tablet">
           <div className="input-bar__text">

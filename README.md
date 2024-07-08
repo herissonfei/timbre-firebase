@@ -1,3 +1,7 @@
+Account for testing
+email：admin@gmail.com
+password: aaaaaa
+
 [Version francais](#francais)
 
 # user manual

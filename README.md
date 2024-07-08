@@ -31,14 +31,23 @@
 
 2：Go to catalog page to view all stamps.
 
-3： Conversion between English and French.
+3：Conversion between English and French.
 
 4：Go to login page.
 
 5： Go to the registration page.
 
 ## Catalog Page
-![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/da34da9b-9404-4938-8ee2-f9bd30c4d7c4)
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/59ddc72e-55c9-4eb4-b12e-fbb1de5998f5)
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/4b37e6da-9cf4-44b0-bb57-64e0b3b1c391)
+
+1: Sort by different options, such as price.
+
+2: Click “Advanced Search” to display the search menu.
+
+3: Pagination: you can display the previous page or the next page or directly access the stamps of a certain page. Each page can display up to 10 stamp auctions.
+
+4: Go to auction details page
 
 # francais
 
@@ -58,7 +67,7 @@
 ## Page de Catalogue
 
 ![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/cb037672-dde0-4ff1-a81c-09a625229f46)
-![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/5a71e5c0-0e53-44bf-b879-ff38c8e72319)
+
 
 
 1: Trier selon différentes options, telles que le prix.

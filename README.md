@@ -1,7 +1,7 @@
 [Version francais](#francais)
 
 # user manual
-
+[Version phone](#phone)
 ## Home page
 ![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/87bec703-6e68-44a5-adaa-e8017bde5386)
 1：Conversion between English and French.
@@ -22,6 +22,9 @@
 3: Filter: filter according to different conditions (one or more).
 
 4: Go to the auction details page.
+# phone
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/9d4e57c3-f16d-4607-ae25-68c2d03fdf11)
+
 
 # francais
 
@@ -44,7 +47,7 @@
 
 1: Trier selon différentes options, telles que le prix.
 
-2: Pagination : vous pouvez afficher la page précédente ou la page suivante ou accéder directement aux timbres d'une certaine page. Chaque page peut afficher jusqu'à 20 enchères de timbres.
+2: Pagination : vous pouvez afficher la page précédente ou la page suivante ou accéder directement aux timbres d'une certaine page. Chaque page peut afficher jusqu'à 10 enchères de timbres.
 
 3: Filtrer : filtrer selon différentes conditions (une ou plusieurs).
 
@@ -52,5 +55,28 @@
 
 
 # mobile
-![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/c3924eaa-d576-41a0-b38c-385a5c1e71c8)
+## Page d'accueil
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/0d314db8-bd2a-4dfb-87b4-0f6bb8ae1371)
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/69ab60c7-b314-4d74-980a-ff9cd96cba48)
 
+1： Cliquez sur l'icône pour afficher le menu.
+
+2： Aller à la page catalogue pour voir tous les timbres.
+
+3： Conversion entre l'anglais et le français.
+
+4： Aller à la page de connexion.
+
+5： Aller à la page d'inscription.
+
+## Page de Catalogue
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/df281357-5f3e-44bf-816f-cafa5682714f)
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/7f6e5e06-1b91-4742-a45f-192201d37fbd)
+
+1: Trier selon différentes options, telles que le prix.
+
+2: Cliquez sur “Recherche Avancée” pour afficher le menu de recherche.
+
+3: Pagination : vous pouvez afficher la page précédente ou la page suivante ou accéder directement aux timbres d'une certaine page. Chaque page peut afficher jusqu'à 10 enchères de timbres.
+
+4: Aller à la page de détails de l'enchères

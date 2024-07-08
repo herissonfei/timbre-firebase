@@ -26,7 +26,7 @@
 # francais
 
 # guide d'utilisation
-
+[Version mobile](#mobile)
 ## Page d'accueil
 ![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/16460e56-41d3-4610-b51b-7539da233c74)
 
@@ -49,3 +49,8 @@
 3: Filtrer : filtrer selon différentes conditions (une ou plusieurs).
 
 4: Aller à la page de détails de l'enchères
+
+
+# mobile
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/c3924eaa-d576-41a0-b38c-385a5c1e71c8)
+

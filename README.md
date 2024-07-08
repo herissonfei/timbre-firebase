@@ -23,8 +23,22 @@
 
 4: Go to the auction details page.
 # phone
+## Home page
 ![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/9d4e57c3-f16d-4607-ae25-68c2d03fdf11)
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/c6a9b71c-5983-4596-b8ac-a08a9cfb0344)
 
+1：Click the icon to display the menu.
+
+2：Go to catalog page to view all stamps.
+
+3： Conversion between English and French.
+
+4：Go to login page.
+
+5： Go to the registration page.
+
+## Catalog Page
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/da34da9b-9404-4938-8ee2-f9bd30c4d7c4)
 
 # francais
 
@@ -44,6 +58,8 @@
 ## Page de Catalogue
 
 ![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/cb037672-dde0-4ff1-a81c-09a625229f46)
+![image](https://github.com/herissonfei/timbre-firebase/assets/89328999/5a71e5c0-0e53-44bf-b879-ff38c8e72319)
+
 
 1: Trier selon différentes options, telles que le prix.
 

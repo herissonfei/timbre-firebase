@@ -37,6 +37,41 @@ export const Header = () => {
 
   return (
     <div>
+      <header className="menu">
+        <div>
+          <Link to="/home">
+            <img src={logo} alt="logo Stampee" className="menu__logo" />
+          </Link>
+        </div>
+        <div className="input-bar input-bar--tablet">
+          <div className="input-bar__text">
+            <p>{t("Advanced")}</p>
+            <img
+              className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
+              src={dropdownArrowBlue}
+              alt="fleche dropwdown"
+            />
+          </div>
+          <input
+            className="input-bar__input"
+            type="text"
+            id="input-bar-tablet"
+            name="input-bar"
+            placeholder="Trouvez une enchère"
+          />
+        </div>
+        <button
+          className="burger"
+          onClick={toggleMenu}
+          aria-label="burger"
+          data-js-burger
+        >
+          <span className="burger__bar"></span>
+          <span className="burger__bar"></span>
+          <span className="burger__bar"></span>
+        </button>
+      </header>
+
       <header className="header header--bg">
         <div className="wrapper--header">
           <Link to="/home">
@@ -60,7 +95,7 @@ export const Header = () => {
             />
           </div>
           {/* ------------------------------------- */}
-          {/* <LanguageSwitcher /> */}
+
           {currentUser ? (
             <ul className="wrapper--header menu__sous-menu menu__sous-menu--header--login">
               <div>
@@ -113,40 +148,6 @@ export const Header = () => {
           )}
         </div>
       </header>
-      <nav className="menu">
-        <div className="menu__logo">
-          <Link href="/home">
-            <img src={logo} alt="logo Stampee" />
-          </Link>
-        </div>
-        <div className="input-bar input-bar--tablet">
-          <div className="input-bar__text">
-            <p>{t("Advanced")}</p>
-            <img
-              className="icone-dropdown-arrow icone-dropdown-arrow--input-bar"
-              src={dropdownArrowBlue}
-              alt="fleche dropwdown"
-            />
-          </div>
-          <input
-            className="input-bar__input"
-            type="text"
-            id="input-bar-tablet"
-            name="input-bar"
-            placeholder="Trouvez une enchère"
-          />
-        </div>
-        <button
-          className="burger"
-          onClick={toggleMenu}
-          aria-label="burger"
-          data-js-burger
-        >
-          <span className="burger__bar"></span>
-          <span className="burger__bar"></span>
-          <span className="burger__bar"></span>
-        </button>
-      </nav>
     </div>
   );
 };

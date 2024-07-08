@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { RechercheContext } from "../../context/RechercheContext";
 import { db, auth } from "../../firebase";
 import { signOut } from "firebase/auth";
+import LanguageSwitcher from "../../LanguageSwitcher";
 
 import {
   doc,
@@ -388,57 +389,60 @@ export const ListePrive = () => {
             </li>
             <li className="menu__item menu__item--principal">
               <Link className="menu__link" to="#">
-                Fonctionnement
+                {t("Functioning")}
+                
               </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
                   <Link className="menu__link" to="#">
-                    Termes et conditions
+                    {t("Terms_conditions")}
+                
                   </Link>
                 </li>
                 <li className="menu__item">
                   <Link className="menu__link" to="#">
-                    Aide
+                    {t("Help")}
                   </Link>
                 </li>
                 <li className="menu__item">
                   <Link className="menu__link" to="#">
-                    Contactez le webmestre
+                    {t("Contact_the_webmaster")}
                   </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
               <Link className="menu__link" to="">
-                À propos de Lord Réginald Stampee III
+                {t("propos")}
               </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
                   <Link className="menu__link" to="#">
-                    La philatélie, c'est la vie.
+                    {t("Philately_is_life")}
                   </Link>
                 </li>
                 <li className="menu__item">
                   <Link className="menu__link" to="#">
-                    Biographie du Lord
+                    {t("Lords_biography")}
                   </Link>
                 </li>
                 <li className="menu__item">
                   <Link className="menu__link" to="#">
-                    Historique familial
+                    {t("Family_history")}
                   </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
               <Link className="menu__link" to="#">
-                contactez-nous
+                {t("Contact_us")}
               </Link>
             </li>
           </ul>
           <Link to="/home">
             <img className="footer__logo" src={logo} alt="logo Stampee" />
           </Link>
+          <LanguageSwitcher />
 
           {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile ">
             <li className="menu__item">
@@ -453,12 +457,12 @@ export const ListePrive = () => {
               <div>
                 <li className="menu__item divid">
                   <Link className="navEntete-link" to="#">
-                    Bonjour {user.nom}
+                    {t("Hi")} {user.nom}
                   </Link>
                 </li>
                 <li className="menu__item divid">
                   <Link className="navEntete-link" to="/publish">
-                    publier une enchère
+                    {t("post")}
                   </Link>
                 </li>
               </div>
@@ -466,13 +470,13 @@ export const ListePrive = () => {
               <div>
                 <li className="menu__item">
                   <Link className="" onClick={() => signOut(auth)}>
-                    Se déconnecter
+                    {t("Sign_out")}
                   </Link>
                 </li>
 
                 <li className="menu__item">
                   <Link className="navEntete-link" to="/listePrive">
-                    mes enchères
+                    {t("my_auctions")}
                   </Link>
                 </li>
               </div>
@@ -480,10 +484,10 @@ export const ListePrive = () => {
           ) : (
             <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile mobile--login">
               <li className="menu__item">
-                <Link to="/login">Se connecter</Link>
+                <Link to="/login">{t("Log_in")}</Link>
               </li>
               <li className="menu__item">
-                <Link to="/register">Devenir membre</Link>
+                <Link to="/register">{t("Become_a_member")}</Link>
               </li>
             </ul>
           )}
@@ -491,8 +495,8 @@ export const ListePrive = () => {
         {/* <!-- HERO --> */}
         <div className="hero hero--page-interieure">
           <div className="wrapper">
-            <h1 className="hero__text">Parcourez nos enchères</h1>
-            <h2 className="hero__text--sous-titre">Trouvez la perle rare</h2>
+            <h1 className="hero__text">{t("BROWSE")}</h1>
+            <h2 className="hero__text--sous-titre">{t("PEARL")}</h2>
             <Link className="btn" to="#">
               Fonctionnement
             </Link>

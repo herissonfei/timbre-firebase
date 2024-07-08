@@ -32,7 +32,7 @@ export const Login = () => {
           <Link to="/home">
             <img
               width="200"
-              className="returnImg"
+              className="returnLogo"
               src={logo}
               alt="logo Stampee"
             />

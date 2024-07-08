@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { v4 as uuid } from "uuid";
+import { Link } from "react-router-dom";
+
 import { db, storage } from "../../firebase";
 import { doc, setDoc, onSnapshot } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -133,14 +135,14 @@ export const Publish = () => {
       {/* <h1 className="black">邮票竞拍表单</h1> */}
       <div>
         <div className="returnLogo">
-          <a href="/home">
+          <Link to="/home">
             <img
               width="200"
-              className="returnImg"
+              className="returnLogo"
               src={logo}
               alt="logo Stampee"
             />
-          </a>
+          </Link>
         </div>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="formContainer">

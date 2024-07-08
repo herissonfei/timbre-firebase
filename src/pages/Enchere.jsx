@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 import { Header } from "../components/Header/Header";
 import { Nav } from "../components/Nav/Nav";
 import { Footer } from "../components/Footer/Footer";
@@ -26,6 +26,8 @@ import { collection, doc, query, where, getDocs } from "firebase/firestore";
 export const Enchere = () => {
   const { id } = useParams();
   // console.log(id);
+  const { t } = useTranslation();
+
   const [bid, setBid] = useState([]);
   const [user, setUser] = useState(null);
   const [reserveprice, setreservePrice] = useState("");
@@ -145,7 +147,7 @@ export const Enchere = () => {
               alt="icone fleche link"
             />
             <Link className="link--border-blue" to="/catalogue">
-              Retour au catalogue
+              {t("Back_catalog")}
             </Link>
           </div>
           <div className="pannels">
@@ -210,27 +212,31 @@ export const Enchere = () => {
                 <div className="pannel__nav">
                   <div>
                     <img width="25" src={Détails} alt="icone détail" />
-                    <p>Détails</p>
+                    <p>{t("Details")}</p>
                   </div>
                   <div>
                     <img width="25" src={Historique} alt="icone historique" />
-                    <p>Historique</p>
+                    <p>{t("history")}</p>
                   </div>
                   <div>
                     <img width="25" src={Vendeur} alt="icone vendeur" />
-                    <p>Vendeur</p>
+                    <p>{t("Seller")}</p>
                   </div>
                 </div>
                 {/* <!-- Description panneau --> */}
                 <div className="pannel__text" data-js-pannel>
                   <p className="tile__text">
-                    Mise courante | <strong>{bid.auctioncount} offre</strong>
+                    {t("Current")} |{" "}
+                    <strong>
+                      {bid.auctioncount} {t("offer")}
+                    </strong>
                   </p>
                   <h2>{bid.reserveprice}$</h2>
                   <p className="tile__text-small">
                     <small>
                       {/* 之后再补 */}
-                      {/* dernière offre par user2022 */}
+                      {/*                   {t("Last_offer_by_user2024")}
+                       */}
                     </small>
                   </p>
                   <p>
@@ -246,23 +252,23 @@ export const Enchere = () => {
                     <strong>Format</strong> : {bid.dimensions}
                   </p>
                   <p>
-                    <strong>Année d'émission</strong> : {bid.creationdate}
+                    <strong>{t("Year_issue")}</strong> : {bid.creationdate}
                   </p>
                   <p>
-                    <strong>Pays d'origine</strong> : {bid.country}
+                    <strong>{t("country")}</strong> : {bid.country}
                   </p>
                 </div>
                 <div className="pannel__text pannel__hidden" data-js-pannel>
-                  <p>Historique</p>
+                  <p>{t("history")}</p>
                 </div>
                 <div className="pannel__text pannel__hidden" data-js-pannel>
-                  <p>Vendeur</p>
+                  <p>{t("Seller")}</p>
                 </div>
               </div>
               {/* <!-- Form miser enchère panneau --> */}
               <div className="pannel__form grid">
                 <div>
-                  <p>Ferme dans</p>
+                  <p>{t("Close")}</p>
                   <p className="tile__lot tile__lot--red">
                     <strong>
                       {/* {new Date(bid.enddate)} */}
@@ -273,10 +279,15 @@ export const Enchere = () => {
                                             ${fermeDans.seconds}s`}
                     </strong>
                   </p>
-                  <small>Début: {bid.startdate} | 00H00</small>
+                  <small>
+                    {t("Beginning")}: {bid.startdate} | 00H00
+                  </small>
                   <br />
 
-                  <small>Fin: {bid.enddate} | 00H00</small>
+                  <small>
+                    {t("Seller")}
+                    {t("END")}: {bid.enddate} | 00H00
+                  </small>
                 </div>
                 {/* <span>1</span> */}
                 <div className="grid grid--3-btn">
@@ -296,16 +307,18 @@ export const Enchere = () => {
                           : "none",
                     }}
                   >
-                    Miser
+                    {t("Bet")}
                   </Link>
                   <Link className="btn" onClick={handleMin}>
                     Min
                   </Link>
                 </div>
                 <ul>
-                  <li>Pays d'envoi : Royaume-Uni</li>
-                  <li>Livraison internationale gratuite</li>
-                  <li>Certification garantie</li>
+                  <li>
+                    {t("Sending_country")} : {t("United_Kingdom")}
+                  </li>
+                  <li>{t("Free_international_delivery")}</li>
+                  <li>{t("Certification_guaranteed")}</li>
                 </ul>
                 <img width="150" src={paiement} alt="icone options paiement" />
               </div>
@@ -317,9 +330,9 @@ export const Enchere = () => {
       <div className="wrapper">
         <section>
           <div className="link wrapper--header ">
-            <h2>Dans la même catégorie</h2>
+            <h2>{t("same_category")}</h2>
             <Link className="link--border-blue" to="#">
-              Tout&nbsp;afficher
+              {t("Allt")}&nbsp;{t("display")}
             </Link>
             <img
               className="icone-link-arrow"
@@ -350,14 +363,14 @@ export const Enchere = () => {
                 </div>
                 <h3>Gold Coast 115-27-LH</h3>
                 <p className="tile__text">
-                  Mise courante | <span>1 offre</span>
+                  {t("Current")} | <span>1 {t("offer")}</span>
                 </p>
                 <span>350.00$</span>
                 <p className="tile__text-small">
-                  <small>dernière offre par user2022</small>
+                  <small> {t("Last_offer_by_user2024")}</small>
                 </p>
                 <Link className="btn tile__btn" to="enchere.html">
-                  Miser
+                  {t("Bet")}
                 </Link>
               </div>
             </div>
@@ -378,14 +391,14 @@ export const Enchere = () => {
                 </div>
                 <h3>US California Scott #1</h3>
                 <p className="tile__text">
-                  Mise courante | <span>5 offres</span>
+                  {t("Current")} | <span>5 {t("offers")}</span>
                 </p>
                 <span>259.00$</span>
                 <p className="tile__text-small">
-                  <small>dernière offre par user2022</small>
+                  <small> {t("Last_offer_by_user2024")}</small>
                 </p>
                 <Link className="btn tile__btn" to="enchere.html">
-                  Miser
+                  {t("Bet")}
                 </Link>
               </div>
             </div>
@@ -406,14 +419,14 @@ export const Enchere = () => {
                 </div>
                 <h3>USA 1857 Scott #36 Used. Deep color</h3>
                 <p className="tile__text">
-                  Mise courante | <span>10 offres</span>
+                  {t("Current")} | <span>10 {t("offers")}</span>
                 </p>
                 <span>79.00$</span>
                 <p className="tile__text-small">
-                  <small>dernière offre par user2022</small>
+                  <small> {t("Last_offer_by_user2024")}</small>
                 </p>
                 <Link className="btn tile__btn" to="enchere.html">
-                  Miser
+                  {t("Bet")}
                 </Link>
               </div>
             </div>
@@ -439,14 +452,14 @@ export const Enchere = () => {
                 </div>
                 <h3>AFFORDABLE GENUINE SCOTT USED SET</h3>
                 <p className="tile__text">
-                  Mise courante | <span>2 offres</span>
+                  {t("Current")} | <span>2 {t("offers")}</span>
                 </p>
                 <span>150.00$</span>
                 <p className="tile__text-small">
-                  <small>dernière offre par user2022</small>
+                  <small> {t("Last_offer_by_user2024")}</small>
                 </p>
                 <Link className="btn tile__btn" to="enchere.html">
-                  Miser
+                  {t("Bet")}
                 </Link>
               </div>
             </div>
@@ -467,14 +480,14 @@ export const Enchere = () => {
                 </div>
                 <h3>Used 50¢ XF Well Centered GEM With PFC Graded</h3>
                 <p className="tile__text">
-                  Mise courante | <span>Aucune offre</span>
+                  {t("Current")} | <span>Aucune offre</span>
                 </p>
                 <span>10.00$</span>
                 <p className="tile__text-small">
-                  <small>dernière offre par user2022</small>
+                  <small> {t("Last_offer_by_user2024")}</small>
                 </p>
                 <Link className="btn tile__btn" to="enchere.html">
-                  Miser
+                  {t("Bet")}
                 </Link>
               </div>
             </div>

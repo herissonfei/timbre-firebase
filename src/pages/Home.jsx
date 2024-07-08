@@ -84,7 +84,7 @@ export const Home = () => {
             type="text"
             id="input-bar-mobile"
             name="input-bar"
-            placeholder="Trouvez une enchère"
+            placeholder={t("Find")}
           />
         </div>
         <aside
@@ -103,81 +103,84 @@ export const Home = () => {
 
           <ul className="menu__list menu__list--mobile">
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="/catalogue">
+              <Link className="menu__link" to="/catalogue">
                 {t("catalog")}
-              </a>
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="catalogue-enchere.html">
+                  <Link className="menu__link" to="catalogue-enchere.html">
                     {t("progress")}
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="catalogue-enchere.html">
+                  <Link className="menu__link" to="catalogue-enchere.html">
                     Archive
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
+
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="#">
-                Fonctionnement
-              </a>
+              <Link className="menu__link" to="#">
+                {t("Functioning")}
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
-                    Termes et conditions
-                  </a>
+                  <Link className="menu__link" to="#">
+                    {t("Terms_conditions")}
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
-                    Aide
-                  </a>
+                  <Link className="menu__link" to="#">
+                    {t("Help")}
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
-                    Contactez le webmestre
-                  </a>
+                  <Link className="menu__link" to="#">
+                    {t("Contact_the_webmaster")}
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="">
-                À propos de Lord Réginald Stampee III
-              </a>
+              <Link className="menu__link" to="">
+                {t("propos")}
+              </Link>
               <ul className="menu__dropdown">
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
-                    La philatélie, c'est la vie.
-                  </a>
+                  <Link className="menu__link" to="#">
+                    {t("Philately_is_life")}
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
-                    Biographie du Lord
-                  </a>
+                  <Link className="menu__link" to="#">
+                    {t("Lords_biography")}
+                  </Link>
                 </li>
                 <li className="menu__item">
-                  <a className="menu__link" href="#">
-                    Historique familial
-                  </a>
+                  <Link className="menu__link" to="#">
+                    {t("Family_history")}
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="menu__item menu__item--principal">
-              <a className="menu__link" href="#">
-                contactez-nous
-              </a>
+              <Link className="menu__link" to="#">
+                {t("Contact_us")}
+              </Link>
             </li>
           </ul>
-          <a href="home">
+          <Link to="home">
             <img className="footer__logo" src={logo} alt="logo Stampee" />
-          </a>
+          </Link>
+          <LanguageSwitcher />
+
           {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile">
             <li className="menu__item">
-              <a href="{{ route('login') }}">Se connecter</a>
+              <a to="{{ route('login') }}">Se connecter</a>
             </li>
             <li className="menu__item">
-              <a href="{{ route('register') }}">Devenir membre</a>
+              <a to="{{ route('register') }}">Devenir membre</a>
             </li>
           </ul> */}
           {currentUser ? (
@@ -185,12 +188,12 @@ export const Home = () => {
               <div>
                 <li className="menu__item divid">
                   <Link className="navEntete-link" to="#">
-                    Bonjour {user.nom}
+                    {t("Hi")} {user.nom}
                   </Link>
                 </li>
                 <li className="menu__item divid">
                   <Link className="navEntete-link" to="/publish">
-                    publier une enchère
+                    {t("post")}
                   </Link>
                 </li>
               </div>
@@ -198,7 +201,7 @@ export const Home = () => {
               <div>
                 <li className="menu__item">
                   <Link className="" onClick={() => signOut(auth)}>
-                    Se déconnecter
+                    {t("Sign_out")}
                   </Link>
                 </li>
 
@@ -208,7 +211,7 @@ export const Home = () => {
                     to="/listePrive"
                     onClick={toggleMenu}
                   >
-                    mes enchères
+                    {t("my_auctions")}
                   </Link>
                 </li>
               </div>
@@ -216,19 +219,19 @@ export const Home = () => {
           ) : (
             <ul className="wrapper--header menu__sous-menu mobile--login">
               <li className="menu__item">
-                <Link to="/login">Se connecter</Link>
+                <Link to="/login">{t("Log_in")}</Link>
               </li>
               <li className="menu__item">
-                <Link to="/register">Devenir membre</Link>
+                <Link to="/register">{t("Become_a_member")}</Link>
               </li>
             </ul>
           )}
           {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile">
             <li className="menu__item">
-              <a href="{{ route('login') }}">Se connecter</a>
+              <a to="{{ route('login') }}">Se connecter</a>
             </li>
             <li className="menu__item">
-              <a href="{{ route('register') }}">Devenir membre</a>
+              <a to="{{ route('register') }}">Devenir membre</a>
             </li>
           </ul> */}
         </aside>

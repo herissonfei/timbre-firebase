@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import LanguageSwitcher from "../../LanguageSwitcher";
 
 import { Header } from "../../components/Header/Header";
 import { Nav } from "../../components/Nav/Nav";
@@ -414,6 +415,7 @@ export const Catalogue = () => {
           <Link to="/home">
             <img className="footer__logo" src={logo} alt="logo Stampee" />
           </Link>
+          <LanguageSwitcher />
 
           {/* <ul className="wrapper--header menu__sous-menu menu__sous-menu--mobile ">
             <li className="menu__item">
@@ -1012,17 +1014,19 @@ export const Catalogue = () => {
 
                       <p className="tile__text">
                         {t("Current")} |{" "}
-                        <span>{bid.auctioncount}&nbsp; {t("offer")}</span>
+                        <span>
+                          {bid.auctioncount}&nbsp; {t("offer")}
+                        </span>
                       </p>
                       <span>{bid.reserveprice}$</span>
                       <p className="tile__text-small">
                         <small>
                           {/* 回过头看 */}
-                           {t("Last_offer_by_user2024")}
+                          {t("Last_offer_by_user2024")}
                         </small>
                       </p>
                       <Link className="btn tile__btn" to={`/enchere/${bid.id}`}>
-                         {t("Bet")}
+                        {t("Bet")}
                       </Link>
                     </div>
                   </div>

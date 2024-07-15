@@ -150,7 +150,7 @@ header .input-bar__input {
 @media only screen and (min-width: 768px) {
   .input-bar--tablet {
     display: flex;
-    padding: 55px 100px 50px 55px;
+    padding: 0px 100px 0px 55px;
   }
 
   .input-bar--tablet .input-bar__input {
